@@ -66,6 +66,12 @@
     <ClInclude Include="include\Modules\RessourcesModule.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\Modules\RessourceModule.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Ressources\Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Maths\Vector2.cpp">
@@ -137,6 +143,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="include\Maths\Vector2.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="include\Ressources\Resource.inl">
       <Filter>Header Files</Filter>
     </None>
   </ItemGroup>

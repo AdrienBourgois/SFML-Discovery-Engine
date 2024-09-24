@@ -32,3 +32,13 @@ void WindowModule::Destroy()
 
 	window->close();
 }
+
+Maths::Vector2u WindowModule::GetSize() const
+{
+	return static_cast<Maths::Vector2u>(window->getSize());
+}
+
+void WindowModule::SetSize(const Maths::Vector2u _size)
+{
+	window->setSize(sf::Vector2u(_size.x, _size.y));
+}

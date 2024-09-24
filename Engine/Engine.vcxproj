@@ -54,7 +54,9 @@
     <ClInclude Include="include\Components\SquareCollider.h" />
     <ClInclude Include="include\Component.h" />
     <ClInclude Include="include\GameObject.h" />
+    <ClInclude Include="include\Modules\RessourceModule.h" />
     <ClInclude Include="include\Modules\RessourcesModule.h" />
+    <ClInclude Include="include\Ressources\Resource.h" />
     <ClInclude Include="include\Scene.h" />
     <ClInclude Include="include\Maths\Vector2.h" />
     <ClCompile Include="src\ModuleManager.cpp" />
@@ -80,10 +82,9 @@
   <ItemGroup>
     <CopyFileToFolders Include="bin\openal32.dll">
       <FileType>Document</FileType>
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</DeploymentContent>
     </CopyFileToFolders>
     <None Include="include\Maths\Vector2.inl" />
+    <None Include="include\Ressources\Resource.inl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
