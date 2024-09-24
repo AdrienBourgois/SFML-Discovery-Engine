@@ -15,10 +15,10 @@ public:
 		player->CreateComponent<Player>();
 
 		GameObject* enemy = CreateDummyGameObject("Enemy", 400.f, sf::Color::Blue);
-		enemy->CreateComponent<Player>();
+		//enemy->CreateComponent<Player>();
 
 		GameObject* enemy2 = CreateDummyGameObject("Enemy2", 0.f, sf::Color::Green);
-		enemy2->CreateComponent<Player>();
+		//enemy2->CreateComponent<Player>();
 	}
 
 	GameObject* CreateDummyGameObject(const std::string& _name, const float _position, const sf::Color _color)
