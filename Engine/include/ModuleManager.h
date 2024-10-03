@@ -10,6 +10,7 @@ public:
 	~ModuleManager();
 
 	void CreateDefaultModules();
+	void AddModule(Module* _module);
 
 	void Awake() const;
 	void Start() const;
@@ -39,25 +40,4 @@ private:
 	std::vector<Module*> modules;
 };
 
-template<class T>
-T* ModuleManager::CreateModule()
-{
-	T* module = new T();
-	module->moduleManager = this;
-	modules.push_back(module);
-	return module;
-}
-
-template<class T>
-T* ModuleManager::GetModule()
-{
-	for (Module*& module : modules)
-	{
-		T* module_cast = dynamic_cast<T*>(module);
-		if (module_cast)
-		{
-			return module_cast;
-		}
-	}
-	return nullptr;
-}
+#include "ModuleManager.inl"

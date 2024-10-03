@@ -63,13 +63,22 @@
     <ClInclude Include="include\Modules\ImGuiModule.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Modules\RessourcesModule.h">
+    <ClInclude Include="include\Modules\ResourcesModule.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Modules\RessourceModule.h">
+    <ClInclude Include="include\Resources\ResourceBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Ressources\Resource.h">
+    <ClInclude Include="include\Resources\Texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Resources\AnimatedTileSet.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Resources\AResource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Modules\LoggerModule.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -140,12 +149,30 @@
     <ClCompile Include="src\Modules\ImGuiModule.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Modules\RessourcesModule.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Resources\ResourceBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Resources\AResource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Resources\Texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Modules\LoggerModule.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="include\Maths\Vector2.inl">
       <Filter>Header Files</Filter>
     </None>
-    <None Include="include\Ressources\Resource.inl">
+    <None Include="include\Resources\ResourceBase.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="include\ModuleManager.inl">
       <Filter>Header Files</Filter>
     </None>
   </ItemGroup>

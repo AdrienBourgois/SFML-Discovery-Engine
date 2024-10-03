@@ -11,6 +11,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Modules\LoggerModule.h" />
+    <ClInclude Include="include\Resources\AnimatedTileSet.h" />
+    <ClCompile Include="src\Modules\LoggerModule.cpp" />
+    <ClCompile Include="src\Resources\AResource.cpp" />
     <ClCompile Include="src\Modules\ImGuiModule.cpp" />
     <ClCompile Include="ImGui\imgui-SFML.cpp">
       <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">TurnOffAllWarnings</WarningLevel>
@@ -44,6 +48,7 @@
     </ClCompile>
     <ClCompile Include="src\Engine.cpp" />
     <ClCompile Include="src\Modules\InputModule.cpp" />
+    <ClCompile Include="src\Modules\RessourcesModule.cpp" />
     <ClCompile Include="src\Modules\SceneModule.cpp" />
     <ClCompile Include="src\Modules\TimeModule.cpp" />
     <ClCompile Include="src\Modules\WindowModule.cpp" />
@@ -54,9 +59,10 @@
     <ClInclude Include="include\Components\SquareCollider.h" />
     <ClInclude Include="include\Component.h" />
     <ClInclude Include="include\GameObject.h" />
-    <ClInclude Include="include\Modules\RessourceModule.h" />
-    <ClInclude Include="include\Modules\RessourcesModule.h" />
-    <ClInclude Include="include\Ressources\Resource.h" />
+    <ClInclude Include="include\Modules\ResourcesModule.h" />
+    <ClInclude Include="include\Resources\AResource.h" />
+    <ClInclude Include="include\Resources\ResourceBase.h" />
+    <ClInclude Include="include\Resources\Texture.h" />
     <ClInclude Include="include\Scene.h" />
     <ClInclude Include="include\Maths\Vector2.h" />
     <ClCompile Include="src\ModuleManager.cpp" />
@@ -73,6 +79,8 @@
     <ClInclude Include="include\Modules\InputModule.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Resources\ResourceBase.cpp" />
+    <ClCompile Include="src\Resources\Texture.cpp" />
     <ClCompile Include="src\Scene.cpp" />
     <ClCompile Include="src\Component.cpp" />
     <ClCompile Include="src\Components\SquareCollider.cpp" />
@@ -84,7 +92,8 @@
       <FileType>Document</FileType>
     </CopyFileToFolders>
     <None Include="include\Maths\Vector2.inl" />
-    <None Include="include\Ressources\Resource.inl" />
+    <None Include="include\ModuleManager.inl" />
+    <None Include="include\Resources\ResourceBase.inl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

@@ -7,7 +7,7 @@ class Module
 	friend class ModuleManager;
 
 protected:
-	~Module() = default;
+	virtual ~Module() = default;
 
 public:
 	virtual void Awake() {}

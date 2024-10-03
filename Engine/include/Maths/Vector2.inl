@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cmath>
+#include <stdexcept>
 
 #pragma warning(push)
 #pragma warning(disable : 4244)
@@ -125,6 +126,11 @@ template<typename T>
 Vector2<T> Vector2<T>::Normalize() const
 {
     float mag = Magnitude();
+
+    if (mag == 0) {
+        throw std::logic_error("Cannot normalize a vector with magnitude 0");
+    }
+
     return Vector2(x / mag, y / mag);
 }
 

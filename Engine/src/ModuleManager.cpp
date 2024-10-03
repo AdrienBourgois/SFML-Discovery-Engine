@@ -21,6 +21,12 @@ void ModuleManager::CreateDefaultModules()
 	CreateModule<SceneModule>();
 }
 
+void ModuleManager::AddModule(Module* _module)
+{
+	_module->moduleManager = this;
+	modules.push_back(_module);
+}
+
 void ModuleManager::Awake() const
 {
 	for (Module* module : modules)
