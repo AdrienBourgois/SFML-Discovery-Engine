@@ -572,3 +572,4 @@ imgui.ini
 !include/
 !lib/
 !Engine/bin/
+!Engine/bin/*
