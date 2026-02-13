@@ -24,30 +24,29 @@ void InputModule::Update()
 	mouseDown.reset();
 	mouseUp.reset();
 
-	sf::Event event;
-	while (window->pollEvent(event))
+	while (const std::optional event = window->pollEvent())
 	{
-		events.push_back(event);
+		events.push_back(event.value());
 
-		if (event.type == sf::Event::Closed)
+		if (event->is<sf::Event::Closed>())
 		{
 			Engine::GetInstance()->Quit();
 		}
-		else if (event.type == sf::Event::KeyPressed)
+		else if (const auto* key_pressed = event->getIf<sf::Event::KeyPressed>())
 		{
-			keyDown.set(event.key.code);
+			keyDown.set(static_cast<size_t>(key_pressed->code));
 		}
-		else if (event.type == sf::Event::KeyReleased)
+		else if (const auto* key_released = event->getIf<sf::Event::KeyReleased>())
 		{
-			keyUp.set(event.key.code);
+			keyUp.set(static_cast<size_t>(key_released->code));
 		}
-		else if (event.type == sf::Event::MouseButtonPressed)
+		else if (const auto* mouse_button_pressed = event->getIf<sf::Event::MouseButtonPressed>())
 		{
-			mouseDown.set(event.mouseButton.button);
+			mouseDown.set(static_cast<size_t>(mouse_button_pressed->button));
 		}
-		else if (event.type == sf::Event::MouseButtonReleased)
+		else if (const auto* mouse_button_released = event->getIf<sf::Event::MouseButtonReleased>())
 		{
-			mouseUp.set(event.mouseButton.button);
+			mouseUp.set(static_cast<size_t>(mouse_button_released->button));
 		}
 	}
 
@@ -60,32 +59,32 @@ void InputModule::Update()
 
 bool InputModule::GetMouseButton(const sf::Mouse::Button _button)
 {
-	return sf::Mouse::isButtonPressed(_button);
+	return isButtonPressed(_button);
 }
 
 bool InputModule::GetKey(const sf::Keyboard::Key _key)
 {
-	return sf::Keyboard::isKeyPressed(_key);
+	return isKeyPressed(_key);
 }
 
 bool InputModule::GetMouseButtonDown(const sf::Mouse::Button _button)
 {
-	return mouseDown[_button];
+	return mouseDown.test(static_cast<unsigned int>(_button));
 }
 
 bool InputModule::GetKeyDown(const sf::Keyboard::Key _key)
 {
-	return keyDown[_key];
+	return keyDown.test(static_cast<unsigned int>(_key));
 }
 
 bool InputModule::GetMouseButtonUp(const sf::Mouse::Button _button)
 {
-	return mouseUp[_button];
+	return mouseUp.test(static_cast<unsigned int>(_button));
 }
 
 bool InputModule::GetKeyUp(const sf::Keyboard::Key _key)
 {
-	return keyUp[_key];
+	return keyUp.test(static_cast<unsigned int>(_key));
 }
 
 Maths::Vector2i InputModule::mousePosition = Maths::Vector2i::Zero;
@@ -93,7 +92,7 @@ Maths::Vector2i InputModule::mouseDelta = Maths::Vector2i::Zero;
 
 std::vector<sf::Event> InputModule::events;
 
-std::bitset<sf::Mouse::Button::ButtonCount> InputModule::mouseDown;
-std::bitset<sf::Mouse::Button::ButtonCount> InputModule::mouseUp;
-std::bitset<sf::Keyboard::Key::KeyCount> InputModule::keyDown;
-std::bitset<sf::Keyboard::Key::KeyCount> InputModule::keyUp;
+std::bitset<sf::Mouse::ButtonCount> InputModule::mouseDown;
+std::bitset<sf::Mouse::ButtonCount> InputModule::mouseUp;
+std::bitset<sf::Keyboard::KeyCount> InputModule::keyDown;
+std::bitset<sf::Keyboard::KeyCount> InputModule::keyUp;

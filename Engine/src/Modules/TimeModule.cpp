@@ -1,5 +1,7 @@
 #include "Modules/TimeModule.h"
 
+#include <SFML/System/Time.hpp>
+
 void TimeModule::Awake()
 {
 	Module::Awake();

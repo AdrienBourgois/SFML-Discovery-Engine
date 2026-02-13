@@ -1,9 +1,9 @@
 #pragma once
 #include <SFML/Graphics/Sprite.hpp>
 
-#include "ARendererComponent.h"
+#include "ARenderedComponent.h"
 
-class SpriteRenderer : public ARendererComponent
+class SpriteRenderer : public ARenderedComponent
 {
 public:
 	SpriteRenderer();

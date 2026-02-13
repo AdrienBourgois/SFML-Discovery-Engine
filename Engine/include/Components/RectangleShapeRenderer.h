@@ -2,9 +2,9 @@
 
 #include <SFML/Graphics/RectangleShape.hpp>
 
-#include "ARendererComponent.h"
+#include "ARenderedComponent.h"
 
-class RectangleShapeRenderer : public ARendererComponent
+class RectangleShapeRenderer : public ARenderedComponent
 {
 public:
 	RectangleShapeRenderer();

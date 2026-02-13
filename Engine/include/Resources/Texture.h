@@ -17,7 +17,7 @@ public:
 
 	Texture* AddSprite(const std::string& _name, const sf::IntRect& _rect);
 
-	Texture* AddSprites(const std::string& _base_name, const sf::IntRect& _rect, const sf::Vector2i& _size, const sf::Vector2i& _offset);
+	Texture* AddSpriteSheet(const std::string& _base_name, const sf::IntRect& _rect, const sf::Vector2i& _size, const sf::Vector2i& _offset);
 
 private:
 	std::unordered_map<std::string, sf::Sprite> sprites;

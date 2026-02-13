@@ -20,7 +20,7 @@ public:
 	/**
 	 * \brief Default destructor.
 	 */
-	~TimeModule() = default;
+	~TimeModule() override = default;
 
 	/**
 	 * \brief Called when the module is initialized.

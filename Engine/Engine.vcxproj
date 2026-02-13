@@ -12,7 +12,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Modules\LoggerModule.h" />
-    <ClInclude Include="include\Resources\AnimatedTileSet.h" />
     <ClCompile Include="src\Modules\LoggerModule.cpp" />
     <ClCompile Include="src\Resources\AResource.cpp" />
     <ClCompile Include="src\Modules\ImGuiModule.cpp" />
@@ -54,7 +53,7 @@
     <ClCompile Include="src\Modules\WindowModule.cpp" />
     <ClInclude Include="include\Modules\ImGuiModule.h" />
     <ClInclude Include="include\Engine.h" />
-    <ClInclude Include="include\Components\ARendererComponent.h" />
+    <ClInclude Include="include\Components\ARenderedComponent.h" />
     <ClInclude Include="include\Components\RectangleShapeRenderer.h" />
     <ClInclude Include="include\Components\SquareCollider.h" />
     <ClInclude Include="include\Component.h" />
@@ -68,7 +67,7 @@
     <ClCompile Include="src\ModuleManager.cpp" />
     <ClCompile Include="src\Module.cpp" />
     <ClCompile Include="src\Components\SpriteRenderer.cpp" />
-    <ClCompile Include="src\Components\ARendererComponent.cpp" />
+    <ClCompile Include="src\Components\ARenderedComponent.cpp" />
     <ClCompile Include="src\Components\RectangleShapeRenderer.cpp" />
     <ClInclude Include="include\Components\SpriteRenderer.h" />
     <ClInclude Include="include\Module.h" />
@@ -77,6 +76,7 @@
     <ClInclude Include="include\Modules\SceneModule.h" />
     <ClInclude Include="include\Modules\WindowModule.h" />
     <ClInclude Include="include\Modules\InputModule.h" />
+    <ClInclude Include="include\Utils\ImGuiUtilities.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Resources\ResourceBase.cpp" />
@@ -88,9 +88,6 @@
     <ClCompile Include="src\Maths\Vector2.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <CopyFileToFolders Include="bin\openal32.dll">
-      <FileType>Document</FileType>
-    </CopyFileToFolders>
     <None Include="include\Maths\Vector2.inl" />
     <None Include="include\ModuleManager.inl" />
     <None Include="include\Resources\ResourceBase.inl" />

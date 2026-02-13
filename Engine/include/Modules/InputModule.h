@@ -35,10 +35,10 @@ private:
 	static Maths::Vector2i mousePosition;
 	static Maths::Vector2i mouseDelta;
 
-	static std::bitset<sf::Keyboard::Key::KeyCount> keyDown;
-	static std::bitset<sf::Keyboard::Key::KeyCount> keyUp;
-	static std::bitset<sf::Mouse::Button::ButtonCount> mouseDown;
-	static std::bitset<sf::Mouse::Button::ButtonCount> mouseUp;
+	static std::bitset<sf::Keyboard::KeyCount> keyDown;
+	static std::bitset<sf::Keyboard::KeyCount> keyUp;
+	static std::bitset<sf::Mouse::ButtonCount> mouseDown;
+	static std::bitset<sf::Mouse::ButtonCount> mouseUp;
 
 	static std::vector<sf::Event> events;
 };

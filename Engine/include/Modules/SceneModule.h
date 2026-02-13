@@ -10,7 +10,7 @@ class SceneModule final : public Module
 {
 public:
 	SceneModule();
-	~SceneModule() = default;
+	~SceneModule() override = default;
 
 	void Start() override;
 	void Render() override;

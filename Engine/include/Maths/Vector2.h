@@ -1,6 +1,12 @@
 #pragma once
-#include <algorithm>
-#include <SFML/System/Vector2.hpp>
+
+struct ImVec2;
+
+namespace sf
+{
+	template<typename T>
+	class Vector2;
+}
 
 namespace Maths
 {
@@ -26,62 +32,63 @@ namespace Maths
 		/**  
 		 * \brief Default destructor  
 		 */
-		~Vector2() = default;
+		~Vector2();
 
 		/**  
 		 * \brief Explicit conversion to sf::Vector2  
 		 */
-		explicit operator sf::Vector2<T>() const { return sf::Vector2<T>(x, y); }
+		explicit operator sf::Vector2<T>() const;
+
+		/**  
+		 * \brief Explicit conversion to ImVec2
+		 */
+		explicit operator ImVec2() const;
 
 		/**  
 		 * \brief Constructor from sf::Vector2  
 		 * \param _value sf::Vector2 to convert from  
 		 */
-		explicit Vector2(sf::Vector2<T> _value) : x(_value.x), y(_value.y) {}
+		explicit Vector2(sf::Vector2<T> _value);
+
+		/**
+		 * \brief Constructor from ImVec2
+		 * \param _value ImVec2 to convert from
+		 */
+		explicit Vector2(ImVec2 _value);
 
 		/**  
 		 * \brief Copy constructor  
 		 */
-		Vector2(const Vector2& _other) = default;
+		Vector2(const Vector2& _other);
 
 		/**  
 		 * \brief Move constructor  
 		 */
-		Vector2(Vector2&& _other) noexcept = default;
+		Vector2(Vector2&& _other) noexcept;
 
 		/**  
 		 * \brief Copy assignment operator  
 		 */
-		Vector2& operator=(const Vector2& _other) = default;
+		Vector2& operator=(const Vector2& _other);
 
 		/**  
 		 * \brief Assignment operator from sf::Vector2  
 		 * \param _other sf::Vector2 to assign from  
 		 * \return Reference to this  
 		 */
-		Vector2& operator=(const sf::Vector2<T>& _other)
-		{
-			x = _other.x;
-			y = _other.y;
-			return *this;
-		}
+		Vector2& operator=(const sf::Vector2<T>& _other);
 
 		/**  
 		 * \brief Move assignment operator  
 		 */
-		Vector2& operator=(Vector2&& _other) noexcept = default;
+		Vector2& operator=(Vector2&& _other) noexcept;
 
 		/**  
 		 * \brief Move assignment operator from sf::Vector2  
 		 * \param _other sf::Vector2 to move from  
 		 * \return Reference to this  
 		 */
-		Vector2& operator=(sf::Vector2<T>&& _other) noexcept
-		{
-			x = std::move(_other.x);
-			y = std::move(_other.y);
-			return *this;
-		}
+		Vector2& operator=(sf::Vector2<T>&& _other) noexcept;
 
 		/**  
 		 * \brief Addition operator  

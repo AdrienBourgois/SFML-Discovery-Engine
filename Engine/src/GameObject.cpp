@@ -21,7 +21,7 @@ void GameObject::AddComponent(Component* _component)
 
 void GameObject::RemoveComponent(Component* _component)
 {
-	components.erase(std::remove(components.begin(), components.end(), _component), components.end());
+	std::erase(components, _component);
 }
 
 #pragma region Events

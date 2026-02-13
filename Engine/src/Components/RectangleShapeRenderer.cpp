@@ -1,49 +1,57 @@
 #include "Components/RectangleShapeRenderer.h"
 
-#include <imgui-SFML.h>
-#include <imgui.h>
 #include <iostream>
 
+#include <imgui-SFML.h>
+
 #include "SFML/Graphics/Shape.hpp"
+#include "Utils/ImGuiUtilities.h"
 
 RectangleShapeRenderer::RectangleShapeRenderer()
 {
-	shape = new sf::RectangleShape();
+    shape = new sf::RectangleShape();
 }
 
 RectangleShapeRenderer::~RectangleShapeRenderer()
 {
-	delete shape;
-	shape = nullptr;
+    delete shape;
+    shape = nullptr;
 }
 
 void RectangleShapeRenderer::Render(sf::RenderWindow* _window)
 {
-	ARendererComponent::Render(_window);
+    ARenderedComponent::Render(_window);
 
-	const GameObject* owner = GetOwner();
+    const GameObject* owner = GetOwner();
 
-	const Maths::Vector2<float> position = owner->GetPosition();
-	shape->setPosition(position.x, position.y);
-	shape->setSize(static_cast<sf::Vector2f>(owner->GetScale() * size));
-	shape->setRotation(owner->GetRotation());
-	shape->setFillColor(color);
+    const Maths::Vector2<float> position = owner->GetPosition();
+    shape->setPosition({position.x, position.y});
+    shape->setSize(static_cast<sf::Vector2f>(owner->GetScale() * size));
+    shape->setRotation(owner->GetRotation());
+    shape->setFillColor(color);
 
-	_window->draw(*shape);
+    _window->draw(*shape);
 }
 
 void RectangleShapeRenderer::OnDebug()
 {
-	/*ARendererComponent::OnDebug();
+    ARenderedComponent::OnDebug();
 
-	const sf::Vector2f min = shape->getPosition();
-	const sf::Vector2f max = min + shape->getSize();
-	const ImU32 col = ImGui::GetColorU32(IM_COL32(255, 0, 0, 255));
+    //sf::FloatRect bounds = shape->getGlobalBounds();
 
-	ImGui::Begin("RectangleShapeRenderer");
-	if (ImGui::Button("Click"))
-		std::cout << "COUCOU";
-	ImGui::End();
+    const Maths::Vector2f min = static_cast<Maths::Vector2f>(shape->getPosition());
+    const Maths::Vector2f size = static_cast<Maths::Vector2f>(shape->getSize());
+    const Maths::Vector2f max = min + size;
 
-	ImGui::GetBackgroundDrawList()->AddRect(min, max, col);*/
+    //const ImU32 col = ImGuiUtilities::Red;
+
+    ImGui::GetBackgroundDrawList()->AddRect(static_cast<ImVec2>(min), static_cast<ImVec2>(max), ImU32(0));
+
+    /*	
+    ImGui::Begin("RectangleShapeRenderer");
+    if (ImGui::Button("Click"))
+        std::cout << "COUCOU";
+    ImGui::End();
+
+    */
 }

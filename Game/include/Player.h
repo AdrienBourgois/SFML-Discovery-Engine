@@ -9,20 +9,20 @@ public:
 	{
 		Maths::Vector2<float> position = GetOwner()->GetPosition();
 
-		if (InputModule::GetKey(sf::Keyboard::D))
+		if (InputModule::GetKey(sf::Keyboard::Key::D))
 		{
 			position.x += speed * _delta_time;
 		}
-		if (InputModule::GetKey(sf::Keyboard::Q))
+		if (InputModule::GetKey(sf::Keyboard::Key::Q))
 		{
 			position.x -= speed * _delta_time;
 		}
 
-		if (InputModule::GetKey(sf::Keyboard::Z))
+		if (InputModule::GetKey(sf::Keyboard::Key::Z))
 		{
 			position.y -= speed * _delta_time;
 		}
-		if (InputModule::GetKey(sf::Keyboard::S))
+		if (InputModule::GetKey(sf::Keyboard::Key::S))
 		{
 			position.y += speed * _delta_time;
 		}

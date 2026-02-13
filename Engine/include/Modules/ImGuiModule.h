@@ -28,5 +28,5 @@ class ImGuiModule final : public Module
 	bool displayDebugWindow = false;
 
 protected:
-	~ImGuiModule() = default;
+	~ImGuiModule() override = default;
 };
