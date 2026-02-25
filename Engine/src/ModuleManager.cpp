@@ -67,6 +67,14 @@ void ModuleManager::Render() const
 	}
 }
 
+void ModuleManager::OnGUI() const
+{
+	for (Module* module : modules)
+	{
+		module->OnGUI();
+	}
+}
+
 void ModuleManager::PostRender() const
 {
 	for (Module* module : modules)
@@ -96,14 +104,6 @@ void ModuleManager::Present() const
 	for (Module* module : modules)
 	{
 		module->Present();
-	}
-}
-
-void ModuleManager::OnGUI() const
-{
-	for (Module* module : modules)
-	{
-		module->OnGUI();
 	}
 }
 

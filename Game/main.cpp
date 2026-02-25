@@ -4,14 +4,14 @@
 
 int main()
 {
-	const Engine* engine = Engine::GetInstance();
+    const Engine* engine = Engine::GetInstance();
 
-	engine->Init();
+    engine->Init();
 
-	SceneModule* scene_module = engine->GetModuleManager()->GetModule<SceneModule>();
-	scene_module->SetScene<DefaultScene>();
+    SceneModule* scene_module = engine->GetModuleManager()->GetModule<SceneModule>();
+    scene_module->SetScene<DefaultScene>();
 
-	engine->Run();
+    engine->Run();
 
-	return 0;
+    return 0;
 }

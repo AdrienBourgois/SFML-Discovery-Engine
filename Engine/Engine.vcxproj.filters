@@ -69,9 +69,6 @@
     <ClInclude Include="include\Modules\ResourcesModule.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Resources\ResourceBase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\Resources\Texture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -137,9 +134,6 @@
     <ClCompile Include="src\Modules\RessourcesModule.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Resources\ResourceBase.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Resources\AResource.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -149,30 +143,42 @@
     <ClCompile Include="src\Modules\LoggerModule.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ImGui\imgui-SFML.cpp">
-      <Filter>ImGui</Filter>
+    <ClCompile Include="ImGui\*.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ImGui\imgui_widgets.cpp">
-      <Filter>ImGui</Filter>
+    <ClCompile Include="ImGui\*.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ImGui\imgui_tables.cpp">
-      <Filter>ImGui</Filter>
+    <ClCompile Include="ImGui\*.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ImGui\imgui_draw.cpp">
-      <Filter>ImGui</Filter>
+    <ClCompile Include="ImGui\*.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ImGui\imgui_demo.cpp">
-      <Filter>ImGui</Filter>
+    <ClCompile Include="ImGui\*.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ImGui\imgui.cpp">
-      <Filter>ImGui</Filter>
+    <ClCompile Include="ImGui\*.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\*.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\*.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\*.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\*.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\*.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="include\Maths\Vector2.inl">
-      <Filter>Header Files</Filter>
-    </None>
-    <None Include="include\Resources\ResourceBase.inl">
       <Filter>Header Files</Filter>
     </None>
     <None Include="include\ModuleManager.inl">

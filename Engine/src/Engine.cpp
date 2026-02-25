@@ -1,7 +1,5 @@
 #include "Engine.h"
 
-Engine* Engine::instance = nullptr;
-
 Engine* Engine::GetInstance()
 {
 	if (instance == nullptr)
@@ -36,3 +34,5 @@ void Engine::Run() const
 	moduleManager->Destroy();
 	moduleManager->Finalize();
 }
+
+Engine* Engine::instance = nullptr;

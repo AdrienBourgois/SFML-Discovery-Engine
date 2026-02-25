@@ -42,11 +42,27 @@ void GameObject::Start() const
 	}
 }
 
+void GameObject::Update(const float _delta_time) const
+{
+	for (Component* const& component : components)
+	{
+		component->Update(_delta_time);
+	}
+}
+
 void GameObject::PreRender() const
 {
 	for (Component* const& component : components)
 	{
 		component->PreRender();
+	}
+}
+
+void GameObject::Render(sf::RenderWindow* _window) const
+{
+	for (Component* const& component : components)
+	{
+		component->Render(_window);
 	}
 }
 
@@ -119,22 +135,6 @@ void GameObject::Finalize() const
 	for (Component* const& component : components)
 	{
 		component->Finalize();
-	}
-}
-
-void GameObject::Update(const float _delta_time) const
-{
-	for (Component* const& component : components)
-	{
-		component->Update(_delta_time);
-	}
-}
-
-void GameObject::Render(sf::RenderWindow* _window) const
-{
-	for (Component* const& component : components)
-	{
-		component->Render(_window);
 	}
 }
 

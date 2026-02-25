@@ -1,6 +1,6 @@
 #pragma once
 
-#include <filesystem>
+import std;
 
 /**
  * \class AResource
@@ -106,3 +106,6 @@ private:
 	/// Pointer to the reference counter.
 	unsigned int* refCount = nullptr;
 };
+
+template<typename ResourceType>
+concept Resource = std::is_base_of_v<AResource, ResourceType>;

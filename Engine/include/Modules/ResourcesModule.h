@@ -1,28 +1,28 @@
 #pragma once
 
-#include <string>
-#include <unordered_map>
+import std;
 
 #include "Module.h"
 
-#include "Resources/ResourceBase.h"
+#include "Resources/AResource.h"
 
 class ResourcesModule final : public Module
 {
 protected:
 	~ResourcesModule() override = default;
 
-	template<typename T>
-	ResourceBase<T>* LoadResource(const std::string& _path)
+	template<typename ResourceType, typename... CtrParams>
+	requires Resource<ResourceType>
+	std::shared_ptr<ResourceType> LoadResource(const std::string& _path, CtrParams&&... _params)
 	{
 		using ResourceIterator = std::unordered_map<std::string, AResource*>::iterator;
 
 		if (const ResourceIterator it = resources.find(_path); it != resources.end())
 		{
-			return static_cast<T*>(it->second);
+			return static_cast<ResourceType*>(it->second);
 		}
 
-		ResourceBase<T>* resource = new ResourceBase<T>;
+		AResource* resource = new AResource(_params...);
 
 		if (resource->Load(_path))
 		{

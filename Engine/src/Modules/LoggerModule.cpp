@@ -3,28 +3,23 @@
 #include <chrono>
 #include <cstdarg>
 #include <iostream>
-#include <sstream>
+#include <print>
 
-LoggerModule::LogEntry::LogEntry(const ELogLevel _lvl, const std::string& _msg) : timestamp(std::chrono::system_clock::now()), level(_lvl), message(_msg) {}
+LoggerModule::LogEntry::LogEntry(const ELogLevel _lvl, const std::string& _msg, const std::source_location& _loc)
+: timestamp(std::chrono::system_clock::now()), level(_lvl), message(_msg), sourceLocation(_loc)
+{}
 
 std::string LoggerModule::LogEntry::ToString() const
 {
-	std::ostringstream oss;
-	oss << "[" << GetFormattedTime() << "][" << LevelToString(level) << "] " << message;
-	return oss.str();
+	return std::format("[{}][{}] {}", GetFormattedTime(), LevelToString(level), message);
 }
 
 std::string LoggerModule::LogEntry::GetFormattedTime() const
 {
-	const std::time_t time_t_timestamp = std::chrono::system_clock::to_time_t(timestamp);
-	std::tm tm_timestamp;
-	localtime_s(&tm_timestamp, &time_t_timestamp);
-	std::ostringstream time_stream;
-	time_stream << std::put_time(&tm_timestamp, "%Y-%m-%d %H:%M:%S");
-	return time_stream.str();
+	return std::format("{:%Y-%m-%d %H:%M:%S}", timestamp);
 }
 
-constexpr const char* LoggerModule::LogEntry::LevelToString(const ELogLevel _level)
+constexpr std::string_view LoggerModule::LogEntry::LevelToString(const ELogLevel _level)
 {
 	switch (_level)
 	{
@@ -47,19 +42,28 @@ constexpr const char* LoggerModule::LogEntry::LevelToString(const ELogLevel _lev
 
 LoggerModule::LoggerModule()
 {
-	file.open("log.txt", std::ios::out | std::ios::app);
+	file.open(defaultLogFileName, std::ios::out | std::ios::app);
 }
 
 LoggerModule::~LoggerModule()
 {
+	file.flush();
 	file.close();
 }
 
-void LoggerModule::Log(const ELogLevel _level, const std::string& _text)
+void LoggerModule::Flush()
 {
-	const LogEntry log(_level, _text);
-	const std::string log_str = log.ToString();
-	std::cout << log_str << std::endl;
-	file << log_str << std::endl;
+	std::cout.flush();
 	file.flush();
+}
+
+void LoggerModule::Log(const ELogLevel _level, const std::string& _text, const std::source_location& _loc)
+{
+	const LogEntry log(_level, _text, _loc);
+	const std::string log_str = log.ToString();
+
+	std::println("{}", log_str);
+
+	if (file.is_open() && file.good())
+		std::println(file, "{}", log_str);
 }
