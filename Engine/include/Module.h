@@ -1,4 +1,6 @@
 #pragma once
+#include <concepts>
+#include <string>
 
 class ModuleManager;
 
@@ -31,3 +33,6 @@ public:
 protected:
 	ModuleManager* moduleManager = nullptr;
 };
+
+template<typename ModuleType>
+concept IsModule = std::derived_from<ModuleType, Module>;

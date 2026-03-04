@@ -9,14 +9,16 @@ public:
 
 	void Init() const;
 	void Run() const;
-	void Quit() { shouldQuit = true; }
+	void Quit();
 
-	ModuleManager* GetModuleManager() const { return moduleManager; }
+	ModuleManager* GetModuleManager() const;
 
 private:
 	static Engine* instance;
 
-	ModuleManager* moduleManager = new ModuleManager;
+	Engine();
+
+	ModuleManager* moduleManager = nullptr;
 
 	bool shouldQuit = false;
 };

@@ -18,7 +18,10 @@ void ImGuiModule::Start()
 	timeModule = moduleManager->GetModule<TimeModule>();
 	sceneModule = moduleManager->GetModule<SceneModule>();
 
-	ImGui::SFML::Init(*windowModule->GetWindow());
+	if (const bool init_result = ImGui::SFML::Init(*windowModule->GetWindow()); !init_result)
+	{
+		Logger::Log(ELogLevel::Error, "Failed to initialize ImGui-SFML");
+	}
 }
 
 void ImGuiModule::Update()

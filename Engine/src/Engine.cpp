@@ -1,38 +1,57 @@
 #include "Engine.h"
 
+#include "Utils/Logger/Logger.h"
+
 Engine* Engine::GetInstance()
 {
-	if (instance == nullptr)
-		instance = new Engine();
+    if (instance == nullptr)
+        instance = new Engine();
 
-	return instance;
+    return instance;
 }
 
 void Engine::Init() const
 {
-	moduleManager->CreateDefaultModules();
-	moduleManager->Awake();
+    Logger::Log(ELogLevel::Debug, "Engine Initialization Started");
+
+    moduleManager->CreateDefaultModules();
+    moduleManager->Awake();
 }
 
 void Engine::Run() const
 {
-	moduleManager->Start();
-	moduleManager->OnEnable();
+    Logger::Log(ELogLevel::Debug, "Engine Starting");
 
-	while (!shouldQuit)
-	{
-		moduleManager->Update();
-		moduleManager->PreRender();
-		moduleManager->Render();
-		moduleManager->OnGUI();
-		moduleManager->OnDebug();
-		moduleManager->PostRender();
-		moduleManager->Present();
-	}
+    moduleManager->Start();
+    moduleManager->OnEnable();
 
-	moduleManager->OnDisable();
-	moduleManager->Destroy();
-	moduleManager->Finalize();
+    Logger::Log(ELogLevel::Debug, "Engine Running");
+
+    while (!shouldQuit)
+    {
+        moduleManager->Update();
+        moduleManager->PreRender();
+        moduleManager->Render();
+        moduleManager->OnGUI();
+        moduleManager->OnDebug();
+        moduleManager->PostRender();
+        moduleManager->Present();
+    }
+
+    Logger::Log(ELogLevel::Debug, "Engine Stopped");
+
+    moduleManager->OnDisable();
+    moduleManager->Destroy();
+    moduleManager->Finalize();
 }
 
+void Engine::Quit() { shouldQuit = true; }
+
+ModuleManager* Engine::GetModuleManager() const { return moduleManager; }
+
 Engine* Engine::instance = nullptr;
+
+Engine::Engine()
+{
+    moduleManager = new ModuleManager;
+}

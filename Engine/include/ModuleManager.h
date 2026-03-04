@@ -30,10 +30,10 @@ public:
 	void Destroy() const;
 	void Finalize() const;
 
-	template<class T>
+	template<class T> requires IsModule<T>
 	T* CreateModule();
 
-	template<class T>
+	template<class T> requires IsModule<T>
 	T* GetModule();
 
 private:

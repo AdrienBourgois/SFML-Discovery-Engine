@@ -1,15 +1,18 @@
 #pragma once
+#include "Utils/Logger/Logger.h"
 
-template<class T>
+template<class T> requires IsModule<T>
 T* ModuleManager::CreateModule()
 {
+	Logger::Log(ELogLevel::Debug, "Creating module: {}", typeid(T).name());
+
 	T* module = new T();
 	module->moduleManager = this;
 	modules.push_back(module);
 	return module;
 }
 
-template<class T>
+template<class T> requires IsModule<T>
 T* ModuleManager::GetModule()
 {
 	for (Module*& module : modules)
