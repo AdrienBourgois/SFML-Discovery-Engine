@@ -2,11 +2,11 @@
 #include "SceneModule.h"
 #include "Scenes/DefaultScene.h"
 
-int main()
+int main(const int _argc, const char** _argv)
 {
-    const Engine* engine = Engine::GetInstance();
+    Engine* const engine = Engine::GetInstance();
 
-    engine->Init();
+    engine->Init(_argc, _argv);
 
     SceneModule* scene_module = engine->GetModuleManager()->GetModule<SceneModule>();
     scene_module->SetScene<DefaultScene>();

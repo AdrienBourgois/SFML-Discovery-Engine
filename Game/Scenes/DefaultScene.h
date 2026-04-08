@@ -3,8 +3,10 @@
 #include "GameObject.h"
 #include "Player.h"
 #include "RectangleShapeRenderer.h"
+#include "AssetsModule.h"
 #include "Scene.h"
 #include "SquareCollider.h"
+#include "Texture.h"
 
 class DefaultScene final : public Scene
 {
@@ -19,6 +21,9 @@ public:
 
 		GameObject* enemy2 = CreateDummyGameObject("Enemy2", 0.f, sf::Color::Green);
 		//enemy2->CreateComponent<Player>();
+
+		AssetsModule* resources_module = Engine::GetInstance()->GetModuleManager()->GetModule<AssetsModule>();
+		resources_module->LoadAsset<Texture>("logo.png");
 	}
 
 	GameObject* CreateDummyGameObject(const std::string& _name, const float _position, const sf::Color _color)

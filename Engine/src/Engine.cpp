@@ -10,9 +10,11 @@ Engine* Engine::GetInstance()
     return instance;
 }
 
-void Engine::Init() const
+void Engine::Init(const int _argc, const char** _argv)
 {
     Logger::Log(ELogLevel::Debug, "Engine Initialization Started");
+
+    config.SetCommandLineArgs(_argc, _argv);
 
     moduleManager->CreateDefaultModules();
     moduleManager->Awake();

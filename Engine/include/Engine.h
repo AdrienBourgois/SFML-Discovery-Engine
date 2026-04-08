@@ -1,5 +1,6 @@
 #pragma once
 
+#include "EngineConfig.h"
 #include "ModuleManager.h"
 
 class Engine
@@ -7,7 +8,7 @@ class Engine
 public:
 	static Engine* GetInstance();
 
-	void Init() const;
+	void Init(int _argc, const char** _argv);
 	void Run() const;
 	void Quit();
 
@@ -19,6 +20,8 @@ private:
 	Engine();
 
 	ModuleManager* moduleManager = nullptr;
+
+	EngineConfig config;
 
 	bool shouldQuit = false;
 };

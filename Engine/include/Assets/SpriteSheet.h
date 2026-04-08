@@ -1,10 +1,8 @@
 ﻿#pragma once
-#include <string>
-#include <unordered_map>
 
-#include <SFML/Graphics/Sprite.hpp>
+#include "Texture.h"
 
-class SpriteSheet
+class SpriteSheet : public Texture
 {
 public:
     /*SpriteSheet* AddSprite(const std::string& _name, const sf::IntRect& _rect)
