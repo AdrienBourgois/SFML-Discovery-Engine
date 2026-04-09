@@ -27,5 +27,5 @@ private:
 
     std::string invokeCommand;
 
-    void SetCommandLineArgs(int _argc, const char** _argv);
+    void ParseCommandLineArguments(int _argc, const char** _argv);
 };

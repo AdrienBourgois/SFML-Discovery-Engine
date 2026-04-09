@@ -13,7 +13,7 @@ std::string EngineConfig::GetArg(const std::string& _arg) const
     return "";
 }
 
-void EngineConfig::SetCommandLineArgs(const int _argc, const char** _argv)
+void EngineConfig::ParseCommandLineArguments(const int _argc, const char** _argv)
 {
     commandLineArgs.clear();
 
@@ -23,29 +23,46 @@ void EngineConfig::SetCommandLineArgs(const int _argc, const char** _argv)
     if (_argv && _argv[0])
         invokeCommand = _argv[0];
 
-    std::string key;
-    std::string value;
+    std::string pending_key;
 
     for (int i = 1; i < _argc; ++i)
     {
-        if (std::string arg = _argv[i]; arg.starts_with('-'))
+        std::string token = _argv[i];
+
+        if (!token.empty() && token.starts_with('-'))
         {
-            if (!key.empty())
+            // Strip all leading dashes
+            size_t start = 0;
+            while (start < token.size() && token[start] == '-')
+                ++start;
+
+            if (start >= token.size())
+                continue;
+
+            if (!pending_key.empty())
             {
-                commandLineArgs.insert_or_assign(key, value);
-                key.clear();
-                value.clear();
+                commandLineArgs.insert_or_assign(pending_key, "");
+                pending_key.clear();
             }
 
-            key = arg.substr(1);
+            pending_key = token.substr(start);
         }
         else
         {
-            value = arg;
+            if (!pending_key.empty())
+            {
+                commandLineArgs.insert_or_assign(pending_key, token);
+                pending_key.clear();
+            }
         }
+    }
 
-        commandLineArgs.insert_or_assign(key, value);
+    if (!pending_key.empty())
+    {
+        commandLineArgs.insert_or_assign(pending_key, "");
+        pending_key.clear();
     }
 }
+
 
 

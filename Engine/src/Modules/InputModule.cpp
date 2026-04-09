@@ -30,7 +30,7 @@ void InputModule::Update()
 
 		if (event->is<sf::Event::Closed>())
 		{
-			Engine::GetInstance()->Quit();
+			Engine::GetInstance()->RequestQuit();
 		}
 		else if (const auto* key_pressed = event->getIf<sf::Event::KeyPressed>())
 		{

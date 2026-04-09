@@ -10,7 +10,9 @@ public:
 
 	void Init(int _argc, const char** _argv);
 	void Run() const;
-	void Quit();
+	void RequestQuit();
+
+	bool IsQuitRequested() const;
 
 	ModuleManager* GetModuleManager() const;
 
@@ -23,5 +25,5 @@ private:
 
 	EngineConfig config;
 
-	bool shouldQuit = false;
+	bool quitRequested = false;
 };

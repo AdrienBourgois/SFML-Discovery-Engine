@@ -14,7 +14,7 @@ void Engine::Init(const int _argc, const char** _argv)
 {
     Logger::Log(ELogLevel::Debug, "Engine Initialization Started");
 
-    config.SetCommandLineArgs(_argc, _argv);
+    config.ParseCommandLineArguments(_argc, _argv);
 
     moduleManager->CreateDefaultModules();
     moduleManager->Awake();
@@ -29,7 +29,7 @@ void Engine::Run() const
 
     Logger::Log(ELogLevel::Debug, "Engine Running");
 
-    while (!shouldQuit)
+    while (!quitRequested)
     {
         moduleManager->Update();
         moduleManager->PreRender();
@@ -47,9 +47,20 @@ void Engine::Run() const
     moduleManager->Finalize();
 }
 
-void Engine::Quit() { shouldQuit = true; }
+void Engine::RequestQuit()
+{
+    quitRequested = true;
+}
 
-ModuleManager* Engine::GetModuleManager() const { return moduleManager; }
+bool Engine::IsQuitRequested() const
+{
+    return quitRequested;
+}
+
+ModuleManager* Engine::GetModuleManager() const
+{
+    return moduleManager;
+}
 
 Engine* Engine::instance = nullptr;
 
