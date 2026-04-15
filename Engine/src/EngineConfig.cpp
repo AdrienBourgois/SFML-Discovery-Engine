@@ -1,5 +1,7 @@
 ﻿#include "EngineConfig.h"
 
+const std::filesystem::path EngineConfig::TempDirectoryPath = std::filesystem::temp_directory_path() / "SFML Discovery Engine";
+
 bool EngineConfig::ArgExists(const std::string& _arg) const
 {
     return commandLineArgs.contains(_arg);

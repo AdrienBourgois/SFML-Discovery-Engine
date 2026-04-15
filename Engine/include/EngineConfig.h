@@ -8,6 +8,8 @@
 class EngineConfig
 {
 public:
+    static const std::filesystem::path TempDirectoryPath;
+
     static constexpr std::string_view AssetsFolderName = "Assets";
     static constexpr std::string_view EngineVersion = "0.1.0";
 

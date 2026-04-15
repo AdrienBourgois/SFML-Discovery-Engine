@@ -11,16 +11,7 @@ class AssetsModule final : public Module
 public:
 	using Path = std::filesystem::path;
 
-	static constexpr std::string_view AssetsFolderName = "Assets";
-
-	static const Path AssetsFolderPath;
-
-	/**
-	 * \brief Transforms the path to be relative to the project root folder / prefixed with Assets folder name.
-	 * \param _path The path to be transformed.
-	 * \return The relative path to the project root folder.
-	 */
-	static Path GetRelativeAssetPath(const Path& _path);
+	AssetsModule();
 
 	/**
 	 * \brief Checks if a asset exists.
@@ -35,6 +26,7 @@ public:
 private:
 	~AssetsModule() override = default;
 
+	static Path AssetsFolderPath;
 
 	std::unordered_map<std::string, std::shared_ptr<Asset>> assets;
 };

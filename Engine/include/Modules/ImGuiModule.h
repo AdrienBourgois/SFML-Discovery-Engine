@@ -1,5 +1,8 @@
 #pragma once
 
+#include <filesystem>
+
+#include "EngineConfig.h"
 #include "Module.h"
 #include "SceneModule.h"
 #include "TimeModule.h"
@@ -7,6 +10,7 @@
 
 class ImGuiModule final : public Module
 {
+public:
 	void Start() override;
 	void Update() override;
 	void PostRender() override;
@@ -19,6 +23,7 @@ class ImGuiModule final : public Module
 
 	void DisplayGameObjectAsSelected(const GameObject* _game_object);
 
+private:
 	SceneModule* sceneModule = nullptr;
 	WindowModule* windowModule = nullptr;
 	TimeModule* timeModule = nullptr;
@@ -26,6 +31,8 @@ class ImGuiModule final : public Module
 	GameObject* selectedGameObject = nullptr;
 
 	bool displayDebugWindow = false;
+
+	std::filesystem::path iniPath = EngineConfig::TempDirectoryPath / "imgui.ini";
 
 protected:
 	~ImGuiModule() override = default;

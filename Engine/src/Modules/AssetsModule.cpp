@@ -1,20 +1,16 @@
 #include "Modules/AssetsModule.h"
 
-const std::filesystem::path AssetsModule::AssetsFolderPath = std::filesystem::current_path() / AssetsFolderName;
+#include "Engine.h"
+#include "EngineConfig.h"
 
-std::filesystem::path AssetsModule::GetRelativeAssetPath(const Path& _path)
+std::filesystem::path AssetsModule::AssetsFolderPath;
+
+AssetsModule::AssetsModule()
 {
-    if (_path.is_absolute())
-        return relative(_path, AssetsFolderPath);
-
-    return AssetsFolderPath / _path;
+    AssetsFolderPath = std::filesystem::current_path() / EngineConfig::AssetsFolderName;
 }
 
 bool AssetsModule::Exists(const Path& _path)
 {
-    if (_path.is_absolute())
-        return exists(_path);
-
-    const std::filesystem::path path = GetRelativeAssetPath(_path);
-    return exists(path);
+    return exists(_path);
 }

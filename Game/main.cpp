@@ -1,6 +1,7 @@
 #include "Engine.h"
 #include "SceneModule.h"
 #include "Scenes/DefaultScene.h"
+#include "Scenes/DemoScene.h"
 
 int main(const int _argc, const char** _argv)
 {

@@ -23,8 +23,8 @@ public:
 	void SetRotation(const sf::Angle _rotation) { rotation = _rotation; }
 	void SetScale(const Maths::Vector2<float>& _scale) { scale = _scale; }
 
-	template<typename T>
-	T* CreateComponent();
+	template<typename T, typename... Args>
+	T* CreateComponent(Args&&... _args);
 
 	template<typename T>
 	T* GetComponent();
@@ -62,11 +62,11 @@ private:
 	std::vector<Component*> components;
 };
 
-template<typename T>
-T* GameObject::CreateComponent()
+template<typename ComponentType, typename... Args>
+ComponentType* GameObject::CreateComponent(Args&&... _args)
 {
-	T* component = new T();
-	component->SetOwner(this);
+	ComponentType* component = new ComponentType(_args...);
+
 	components.push_back(component);
 	return component;
 }

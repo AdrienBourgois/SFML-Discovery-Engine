@@ -1,5 +1,6 @@
 #include "ModuleManager.h"
 
+#include "Modules/AssetsModule.h"
 #include "Modules/ImGuiModule.h"
 #include "Modules/InputModule.h"
 #include "Modules/SceneModule.h"
@@ -18,6 +19,7 @@ void ModuleManager::CreateDefaultModules()
 	CreateModule<InputModule>();
 	CreateModule<ImGuiModule>();
 	CreateModule<WindowModule>();
+	CreateModule<AssetsModule>();
 	CreateModule<SceneModule>();
 }
 

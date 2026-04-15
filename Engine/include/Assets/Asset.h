@@ -13,7 +13,7 @@
 class Asset
 {
 public:
-	/// Type alias for filesystem path.
+	/// Type alias for filesystem paths.
 	using Path = std::filesystem::path;
 
 	/**
@@ -25,7 +25,7 @@ public:
 	 * \brief Loads the resource from the specified path.
 	 * \warning Derived classes must implement this method and call the base class implementation.
 	 * \param _path The path to the resource.
-	 * \return True if the resource was loaded successfully, false otherwise.
+	 * \return True, if the resource was loaded successfully, false otherwise.
 	 */
 	virtual bool Load(const std::filesystem::path& _path);
 

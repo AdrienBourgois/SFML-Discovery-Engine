@@ -23,7 +23,7 @@ public:
 private:
 	static std::unique_ptr<Logger> instance;
 
-	const std::filesystem::path defaultLogFolder = std::filesystem::temp_directory_path() / "Logs";
+	const std::filesystem::path defaultLogFolder = std::filesystem::temp_directory_path() / "SFML Discovery Engine" / "Logs";
 	const std::string defaultLogFileName = "EngineLog.txt";
 
 	std::ofstream file = std::ofstream();

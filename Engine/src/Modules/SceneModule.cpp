@@ -15,6 +15,11 @@ void SceneModule::Start()
 
 	timeModule = moduleManager->GetModule<TimeModule>();
 	windowModule = moduleManager->GetModule<WindowModule>();
+
+	for (const Scene* scene : scenes)
+	{
+		scene->Start();
+	}
 }
 
 void SceneModule::Render()

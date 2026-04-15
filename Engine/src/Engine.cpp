@@ -13,6 +13,7 @@ Engine* Engine::GetInstance()
 void Engine::Init(const int _argc, const char** _argv)
 {
     Logger::Log(ELogLevel::Debug, "Engine Initialization Started");
+    Logger::Log(ELogLevel::Debug, "Working Directory : \"{}\"", std::filesystem::current_path().string());
 
     config.ParseCommandLineArguments(_argc, _argv);
 

@@ -5,6 +5,7 @@
 
 #include <SFML/Window/Event.hpp>
 
+#include "EngineConfig.h"
 #include "ModuleManager.h"
 
 #include "Modules/InputModule.h"
@@ -21,6 +22,11 @@ void ImGuiModule::Start()
 	if (const bool init_result = ImGui::SFML::Init(*windowModule->GetWindow()); !init_result)
 	{
 		Logger::Log(ELogLevel::Error, "Failed to initialize ImGui-SFML");
+	}
+	else
+	{
+		ImGui::GetIO().IniFilename = nullptr;
+		ImGui::LoadIniSettingsFromDisk(iniPath.string().c_str());
 	}
 }
 
@@ -44,8 +50,6 @@ void ImGuiModule::Update()
 	{
 		DisplayDebugWindow();
 	}
-
-	ImGui::ShowDemoWindow();
 }
 
 void ImGuiModule::PostRender()
@@ -58,6 +62,8 @@ void ImGuiModule::PostRender()
 void ImGuiModule::Finalize()
 {
 	Module::Finalize();
+
+	ImGui::SaveIniSettingsToDisk(iniPath.string().c_str());
 
 	ImGui::SFML::Shutdown();
 }
