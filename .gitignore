@@ -569,7 +569,6 @@ FodyWeavers.xsd
 imgui.ini
 
 # Engine files
-!include/
-!lib/
-!Engine/bin/
-!Engine/bin/*
+!include/**
+!lib/**
+!Engine/bin/**

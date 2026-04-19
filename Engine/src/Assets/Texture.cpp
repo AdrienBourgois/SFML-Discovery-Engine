@@ -2,10 +2,6 @@
 
 #include "Utils/Logger/Logger.h"
 
-Texture::Texture(const std::filesystem::path& _path)
-{
-}
-
 bool Texture::Load(const std::filesystem::path& _path)
 {
 	Asset::Load(_path);
@@ -26,15 +22,6 @@ bool Texture::Unload()
 {
 	texture.reset();
 	return true;
-}
-
-constexpr std::span<const std::string_view> Texture::GetSupportedExtensions() const
-{
-	return SupportedExtensions;
-}
-
-Texture::~Texture()
-{
 }
 
 sf::Sprite& Texture::GetSprite()

@@ -19,7 +19,7 @@ public:
 	/**
 	 * \brief Destructor.
 	 */
-	virtual ~Asset();
+	virtual ~Asset() = default;
 
 	/**
 	 * \brief Loads the resource from the specified path.
@@ -34,11 +34,13 @@ public:
 	 */
 	virtual bool Unload() = 0;
 
-	virtual std::span<const std::string_view> GetSupportedExtensions() const = 0;
+	Path& GetPath();
 
 protected:
 	/// Absolute path to the resource.
 	Path path;
+
+
 };
 
 template<typename AssetType>

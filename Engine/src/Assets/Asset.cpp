@@ -1,10 +1,12 @@
 #include "Assets/Asset.h"
 
-Asset::~Asset()
+bool Asset::Load(const std::filesystem::path& _path)
 {
-}
-
-bool Asset::Load(const std::filesystem::path& _path) {
     path = _path;
     return true;
+}
+
+Asset::Path& Asset::GetPath()
+{
+    return path;
 }

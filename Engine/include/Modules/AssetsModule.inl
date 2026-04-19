@@ -3,30 +3,42 @@
 #include "Utils/Logger/Logger.h"
 
 template<typename AssetType, typename ... CtrParams> requires IsAsset<AssetType>
-std::shared_ptr<AssetType> AssetsModule::LoadAsset(const std::filesystem::path& _path, CtrParams&&... _params)
+AssetType* AssetsModule::LoadAsset(const std::filesystem::path& _path, CtrParams&&... _params)
 {
     const std::string path_string = _path.string();
 
-    using AssetIterator = std::unordered_map<std::string, std::shared_ptr<Asset>>::iterator;
-
     if (const AssetIterator it = assets.find(path_string); it != assets.end())
     {
-        return std::static_pointer_cast<AssetType>(it->second);
+        Logger::Log(ELogLevel::Warning, "Asset already loaded, use GetAsset() next time : {}", path_string);
+
+        return dynamic_cast<AssetType*>(it->second.get());
     }
 
-    /*if (!AssetType::GetSupportedExtensions().contains(_path.extension().string()))
-    {
-        Logger::Log(ELogLevel::Error, "Unsupported file type: {}", _path.string());
-        return nullptr;
-    }*/
-
-    std::shared_ptr<AssetType> asset = std::make_shared<AssetType>(path_string, _params...);
+    std::unique_ptr<AssetType> asset = std::make_unique<AssetType>(std::forward<CtrParams>(_params)...);
 
     if (asset->Load(_path))
     {
-        assets[path_string] = asset;
-        return asset;
+        AssetType* raw = asset.get();
+        assets[path_string] = std::move(asset);
+        return raw;
     }
+
+    return nullptr;
+}
+
+template <typename AssetType> requires IsAsset<AssetType>
+AssetType* AssetsModule::GetAsset(const Path& _path)
+{
+    const Path full_path = AssetsFolderPath / _path;
+
+    const std::string path_string = full_path.string();
+
+    if (const AssetIterator it = assets.find(path_string); it != assets.end())
+    {
+        return dynamic_cast<AssetType*>(it->second.get());
+    }
+
+    Logger::Log(ELogLevel::Error, "Asset not loaded: {}", path_string);
 
     return nullptr;
 }

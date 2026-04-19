@@ -1,7 +1,24 @@
 #include "Modules/AssetsModule.h"
 
+#include <ranges>
+
 #include "Engine.h"
 #include "EngineConfig.h"
+
+void AssetsModule::UnloadAll()
+{
+    for (std::unique_ptr<Asset>& asset : assets | std::views::values)
+    {
+        asset->Unload();
+        asset.reset();
+    }
+
+    assets.clear();
+}
+
+AssetsModule::~AssetsModule()
+{
+}
 
 std::filesystem::path AssetsModule::AssetsFolderPath;
 
