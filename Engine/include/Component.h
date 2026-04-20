@@ -9,8 +9,6 @@ class GameObject;
 class Component
 {
 public:
-	Component() = default;
-	explicit Component(GameObject* _owner);
 	virtual ~Component() = default;
 
 	virtual void Awake() {}
@@ -37,3 +35,6 @@ public:
 private:
 	GameObject* owner = nullptr;
 };
+
+template<typename ComponentType>
+concept IsComponent = std::is_base_of_v<Component, ComponentType>;

@@ -23,11 +23,11 @@ public:
 	void SetRotation(const sf::Angle _rotation) { rotation = _rotation; }
 	void SetScale(const Maths::Vector2<float>& _scale) { scale = _scale; }
 
-	template<typename T, typename... Args>
-	T* CreateComponent(Args&&... _args);
+	template<typename ComponentType, typename... Args> requires IsComponent<ComponentType>
+	ComponentType* CreateComponent(Args&&... _args);
 
-	template<typename T>
-	T* GetComponent();
+	template<typename ComponentType> requires IsComponent<ComponentType>
+	ComponentType* GetComponent();
 
 	std::vector<Component*>& GetComponents();
 
@@ -62,21 +62,23 @@ private:
 	std::vector<Component*> components;
 };
 
-template<typename ComponentType, typename... Args>
+template<typename ComponentType, typename... Args> requires IsComponent<ComponentType>
 ComponentType* GameObject::CreateComponent(Args&&... _args)
 {
 	ComponentType* component = new ComponentType(_args...);
+
+	component->SetOwner(this);
 
 	components.push_back(component);
 	return component;
 }
 
-template<typename T>
-T* GameObject::GetComponent()
+template<typename ComponentType> requires IsComponent<ComponentType>
+ComponentType* GameObject::GetComponent()
 {
 	for (Component* component : components)
 	{
-		T* result = dynamic_cast<T*>(component);
+		ComponentType* result = dynamic_cast<ComponentType*>(component);
 		if (result != nullptr)
 			return result;
 	}
