@@ -10,8 +10,8 @@ SceneModule::SceneModule() : Module()
 
 SceneModule::~SceneModule()
 {
-    nextFrameScenesToDelete = scenes;
-    ManageDeletedScenes();
+    DeleteAllScenes();
+    DeleteMarkedScenes();
 }
 
 void SceneModule::Start()
@@ -21,7 +21,7 @@ void SceneModule::Start()
     timeModule = moduleManager->GetModule<TimeModule>();
     windowModule = moduleManager->GetModule<WindowModule>();
 
-    for (const Scene* scene : scenes)
+    for (const auto& scene : scenes)
     {
         scene->Start();
     }
@@ -31,7 +31,7 @@ void SceneModule::Render()
 {
     Module::Render();
 
-    for (const Scene* scene : scenes)
+    for (const auto& scene : scenes)
     {
         scene->Render(windowModule->GetWindow());
     }
@@ -41,7 +41,7 @@ void SceneModule::Update()
 {
     Module::Update();
 
-    for (const Scene* scene : scenes)
+    for (const auto& scene : scenes)
     {
         scene->Update(timeModule->GetDeltaTime());
     }
@@ -51,7 +51,7 @@ void SceneModule::Awake()
 {
     Module::Awake();
 
-    for (const Scene* scene : scenes)
+    for (const auto& scene : scenes)
     {
         scene->Awake();
     }
@@ -61,7 +61,7 @@ void SceneModule::Destroy()
 {
     Module::Destroy();
 
-    for (const Scene* scene : scenes)
+    for (const auto& scene : scenes)
     {
         scene->Destroy();
     }
@@ -71,7 +71,7 @@ void SceneModule::Finalize()
 {
     Module::Finalize();
 
-    for (const Scene* scene : scenes)
+    for (const auto& scene : scenes)
     {
         scene->Finalize();
     }
@@ -81,7 +81,7 @@ void SceneModule::OnDebug()
 {
     Module::OnDebug();
 
-    for (const Scene* scene : scenes)
+    for (const auto& scene : scenes)
     {
         scene->OnDebug();
     }
@@ -91,7 +91,7 @@ void SceneModule::OnDebugSelected()
 {
     Module::OnDebugSelected();
 
-    for (const Scene* scene : scenes)
+    for (const auto& scene : scenes)
     {
         scene->OnDebugSelected();
     }
@@ -101,7 +101,7 @@ void SceneModule::OnDisable()
 {
     Module::OnDisable();
 
-    for (const Scene* scene : scenes)
+    for (const auto& scene : scenes)
     {
         scene->OnDisable();
     }
@@ -111,7 +111,7 @@ void SceneModule::OnEnable()
 {
     Module::OnEnable();
 
-    for (const Scene* scene : scenes)
+    for (const auto& scene : scenes)
     {
         scene->OnEnable();
     }
@@ -121,7 +121,7 @@ void SceneModule::OnGUI()
 {
     Module::OnGUI();
 
-    for (const Scene* scene : scenes)
+    for (const auto& scene : scenes)
     {
         scene->OnGUI();
     }
@@ -131,7 +131,7 @@ void SceneModule::PostRender()
 {
     Module::PostRender();
 
-    for (const Scene* scene : scenes)
+    for (const auto& scene : scenes)
     {
         scene->PostRender();
     }
@@ -141,7 +141,7 @@ void SceneModule::PreRender()
 {
     Module::PreRender();
 
-    for (const Scene* scene : scenes)
+    for (const auto& scene : scenes)
     {
         scene->PreRender();
     }
@@ -151,24 +151,29 @@ void SceneModule::Present()
 {
     Module::Present();
 
-    for (const Scene* scene : scenes)
+    for (const auto& scene : scenes)
     {
         scene->Present();
     }
 
-    ManageDeletedScenes();
+    DeleteMarkedScenes();
 }
 
-const std::vector<Scene*>& SceneModule::GetScenesList() const
+const std::vector<std::unique_ptr<Scene>>& SceneModule::GetScenesList() const
 {
     return scenes;
 }
 
 Scene* SceneModule::GetSceneByName(const std::string& _scene_name) const
 {
-    if (const auto it = std::ranges::find(scenes, _scene_name, &Scene::GetName); it != scenes.end())
+    auto condition = [_scene_name](const std::unique_ptr<Scene>& _scene)
     {
-        return *it;
+        return _scene->GetName() == _scene_name;
+    };
+
+    if (const auto it = std::ranges::find_if(scenes, condition); it != scenes.end())
+    {
+        return it->get();
     }
 
     Logger::Log(ELogLevel::Warning, "Scene with name {} not found.", _scene_name);
@@ -176,37 +181,37 @@ Scene* SceneModule::GetSceneByName(const std::string& _scene_name) const
     return nullptr;
 }
 
-bool SceneModule::DeleteSceneByName(const std::string& _scene_name)
+bool SceneModule::DeleteSceneByName(const std::string& _scene_name) const
 {
     if (Scene* scene = GetSceneByName(_scene_name))
     {
-        nextFrameScenesToDelete.push_back(scene);
+        scene->MarkForDeletion();
         return true;
     }
 
     return false;
 }
 
-void SceneModule::DeleteAllScenes()
+void SceneModule::DeleteAllScenes() const
 {
-    nextFrameScenesToDelete.insert(nextFrameScenesToDelete.end(), scenes.begin(), scenes.end());
+    for (const auto& scene : scenes)
+    {
+        scene->MarkForDeletion();
+    }
 }
 
-void SceneModule::ManageDeletedScenes()
+void SceneModule::DeleteMarkedScenes()
 {
-    if (nextFrameScenesToDelete.empty())
-        return;
-
-    for (Scene* scenesToDelete : nextFrameScenesToDelete)
+    std::erase_if(scenes, [](const std::unique_ptr<Scene>& _scene)
     {
-        scenesToDelete->Disabled();
-        scenesToDelete->Destroy();
-        scenesToDelete->Finalize();
+        if (!_scene->IsMarkedForDeletion())
+            return false;
 
-        std::erase(scenes, scenesToDelete);
+        _scene->Destroy();
+        _scene->Finalize();
 
-        delete scenesToDelete;
-    }
+        Logger::Log(ELogLevel::Debug, "Scene {} deleted.", _scene->GetName());
 
-    nextFrameScenesToDelete.clear();
+        return true;
+    });
 }

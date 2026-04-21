@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <memory>
 
 #include "Core/Module.h"
 #include "Core/Scene.h"
@@ -30,7 +31,7 @@ public:
     template <typename T>
     Scene* SetScene();
 
-    const std::vector<Scene*>& GetScenesList() const;
+    const std::vector<std::unique_ptr<Scene>>& GetScenesList() const;
 
     template <typename SceneType> requires IsScene<SceneType>
     SceneType* CreateScene();
@@ -41,20 +42,19 @@ public:
 
     template <typename SceneType> requires IsScene<SceneType>
     bool DeleteSceneByType();
-    bool DeleteSceneByName(const std::string& _scene_name);
+    bool DeleteSceneByName(const std::string& _scene_name) const;
 
-    void DeleteAllScenes();
+    void DeleteAllScenes() const;
 
 private:
-    void ManageDeletedScenes();
+    void DeleteMarkedScenes();
 
-    std::vector<Scene*> scenes;
+    std::vector<std::unique_ptr<Scene>> scenes;
 
     WindowModule* windowModule = nullptr;
     TimeModule* timeModule = nullptr;
 
     Scene* nextFrameScene = nullptr;
-    std::vector<Scene*> nextFrameScenesToDelete;
 };
 
 #include "SceneModule.inl"

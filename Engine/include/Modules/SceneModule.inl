@@ -10,19 +10,20 @@ Scene* SceneModule::SetScene()
 template <typename SceneType> requires IsScene<SceneType>
 SceneType* SceneModule::CreateScene()
 {
-    SceneType* scene = new SceneType();
-    scenes.push_back(scene);
-    return scene;
+    auto scene = std::make_unique<SceneType>();
+    SceneType* rawPtr = scene.get();
+    scenes.push_back(std::move(scene));
+    return rawPtr;
 }
 
 template <typename SceneType> requires IsScene<SceneType>
 Scene* SceneModule::GetSceneByType() const
 {
-    for (Scene* scene : scenes)
+    for (auto scene : scenes)
     {
         if (dynamic_cast<SceneType*>(scene))
         {
-            return scene;
+            return scene.get();
         }
     }
 
@@ -34,9 +35,9 @@ Scene* SceneModule::GetSceneByType() const
 template <typename SceneType> requires IsScene<SceneType>
 bool SceneModule::DeleteSceneByType()
 {
-    if (Scene* scene = GetSceneByType<SceneType>())
+    if (auto* scene = GetSceneByType<SceneType>())
     {
-        nextFrameScenesToDelete.push_back(scene);
+        scene->MarkForDeletion();
         return true;
     }
 

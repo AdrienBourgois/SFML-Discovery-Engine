@@ -78,44 +78,44 @@ void ImGuiModule::DisplayDebugWindow()
 
     ImGui::SeparatorText("Selected GameObject");
 
-    DisplayGameObjectAsSelected(selectedGameObject);
+    DisplayGameObjectAsSelected(*selectedGameObject);
 
     ImGui::End();
 }
 
 void ImGuiModule::DisplayScenesList()
 {
-    const std::vector<Scene*> scenes = sceneModule->GetScenesList();
+    const auto& scenes = sceneModule->GetScenesList();
 
-    for (const Scene* scene : scenes)
+    for (auto&& scene : scenes)
     {
-        DisplayGameObjectsList(scene);
+        DisplayGameObjectsList(*scene);
     }
 }
 
-void ImGuiModule::DisplayGameObjectsList(const Scene* _scene)
+void ImGuiModule::DisplayGameObjectsList(const Scene& _scene)
 {
     constexpr ImGuiTreeNodeFlags base_flags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_SpanAvailWidth;
 
-    if (ImGui::CollapsingHeader(_scene->GetName().c_str(), base_flags))
+    if (ImGui::CollapsingHeader(_scene.GetName().c_str(), base_flags))
     {
-        const std::vector<GameObject*>& game_objects = _scene->GetGameObjects();
-        for (const GameObject* game_object : game_objects)
+        const auto& game_objects = _scene.GetGameObjects();
+        for (const auto& game_object : game_objects)
         {
-            DisplayGameObjectItem(game_object);
+            DisplayGameObjectItem(*game_object);
         }
     }
 }
 
-void ImGuiModule::DisplayGameObjectItem(const GameObject* _game_object)
+void ImGuiModule::DisplayGameObjectItem(const GameObject& _game_object)
 {
-    if (ImGui::Selectable(_game_object->GetName().c_str(), selectedGameObject == _game_object))
+    if (ImGui::Selectable(_game_object.GetName().c_str(), selectedGameObject == &_game_object))
     {
-        selectedGameObject = const_cast<GameObject*>(_game_object);
+        selectedGameObject = const_cast<GameObject*>(&_game_object);
     }
 }
 
-void ImGuiModule::DisplayGameObjectAsSelected(const GameObject* _game_object)
+void ImGuiModule::DisplayGameObjectAsSelected(const GameObject& _game_object)
 {
     if (selectedGameObject == nullptr)
     {
@@ -123,5 +123,5 @@ void ImGuiModule::DisplayGameObjectAsSelected(const GameObject* _game_object)
         return;
     }
 
-    ImGui::Text("%s", _game_object->GetName().c_str());
+    ImGui::Text("%s", _game_object.GetName().c_str());
 }

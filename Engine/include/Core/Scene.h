@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include <SFML/Graphics/RenderWindow.hpp>
 
 #include "Core/GameObject.h"
@@ -7,6 +8,8 @@
 class Scene
 {
 public:
+
+
     explicit Scene(const std::string& _name, bool _enabled_at_start = true);
     virtual ~Scene() = default;
 
@@ -33,21 +36,28 @@ public:
     GameObject* CreateGameObject(const std::string& _name);
 
     GameObject* FindGameObject(const std::string& _name) const;
-    const std::vector<GameObject*>& GetGameObjects() const;
+    const std::vector<std::unique_ptr<GameObject>>& GetGameObjects() const;
 
     void DestroyGameObject(const GameObject* _game_object);
 
-    void Enabled();
-    void Disabled();
+    void Enable();
+    void Disable();
 
     bool IsEnabled() const;
 
+    void MarkForDeletion();
+    bool IsMarkedForDeletion() const;
+
 private:
     std::string name;
-    std::vector<GameObject*> gameObjects;
+    std::vector<std::unique_ptr<GameObject>> gameObjects;
 
     bool enabled = true;
+
+    bool markedForDeletion = false;
 };
+
+typedef std::unique_ptr<Scene> ScenePtr;
 
 template<typename SceneType>
 concept IsScene = std::derived_from<SceneType, Scene>;

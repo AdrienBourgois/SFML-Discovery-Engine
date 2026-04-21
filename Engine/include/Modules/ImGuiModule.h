@@ -18,10 +18,10 @@ public:
 
     void DisplayDebugWindow();
     void DisplayScenesList();
-    void DisplayGameObjectsList(const Scene* _scene);
-    void DisplayGameObjectItem(const GameObject* _game_object);
+    void DisplayGameObjectsList(const Scene& _scene);
+    void DisplayGameObjectItem(const GameObject& _game_object);
 
-    void DisplayGameObjectAsSelected(const GameObject* _game_object);
+    void DisplayGameObjectAsSelected(const GameObject& _game_object);
 
 private:
     SceneModule* sceneModule = nullptr;
