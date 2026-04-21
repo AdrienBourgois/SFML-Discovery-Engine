@@ -2,169 +2,169 @@
 
 #include "ModuleManager.h"
 
-SceneModule::SceneModule(): Module()
+SceneModule::SceneModule() : Module()
 {
-	Scene* main_scene = new Scene("MainScene");
-	scenes.push_back(main_scene);
-	mainScene = main_scene;
+    auto main_scene = new Scene("MainScene");
+    scenes.push_back(main_scene);
+    mainScene = main_scene;
 }
 
 void SceneModule::Start()
 {
-	Module::Start();
+    Module::Start();
 
-	timeModule = moduleManager->GetModule<TimeModule>();
-	windowModule = moduleManager->GetModule<WindowModule>();
+    timeModule = moduleManager->GetModule<TimeModule>();
+    windowModule = moduleManager->GetModule<WindowModule>();
 
-	for (const Scene* scene : scenes)
-	{
-		scene->Start();
-	}
+    for (const Scene* scene : scenes)
+    {
+        scene->Start();
+    }
 }
 
 void SceneModule::Render()
 {
-	Module::Render();
+    Module::Render();
 
-	for (const Scene* scene : scenes)
-	{
-		scene->Render(windowModule->GetWindow());
-	}
+    for (const Scene* scene : scenes)
+    {
+        scene->Render(windowModule->GetWindow());
+    }
 }
 
 void SceneModule::Update()
 {
-	Module::Update();
+    Module::Update();
 
-	for (const Scene* scene : scenes)
-	{
-		scene->Update(timeModule->GetDeltaTime());
-	}
+    for (const Scene* scene : scenes)
+    {
+        scene->Update(timeModule->GetDeltaTime());
+    }
 }
 
 void SceneModule::Awake()
 {
-	Module::Awake();
+    Module::Awake();
 
-	for (const Scene* scene : scenes)
-	{
-		scene->Awake();
-	}
+    for (const Scene* scene : scenes)
+    {
+        scene->Awake();
+    }
 }
 
 void SceneModule::Destroy()
 {
-	Module::Destroy();
+    Module::Destroy();
 
-	for (const Scene* scene : scenes)
-	{
-		scene->Destroy();
-	}
+    for (const Scene* scene : scenes)
+    {
+        scene->Destroy();
+    }
 }
 
 void SceneModule::Finalize()
 {
-	Module::Finalize();
+    Module::Finalize();
 
-	for (const Scene* scene : scenes)
-	{
-		scene->Finalize();
-	}
+    for (const Scene* scene : scenes)
+    {
+        scene->Finalize();
+    }
 }
 
 void SceneModule::OnDebug()
 {
-	Module::OnDebug();
+    Module::OnDebug();
 
-	for (const Scene* scene : scenes)
-	{
-		scene->OnDebug();
-	}
+    for (const Scene* scene : scenes)
+    {
+        scene->OnDebug();
+    }
 }
 
 void SceneModule::OnDebugSelected()
 {
-	Module::OnDebugSelected();
+    Module::OnDebugSelected();
 
-	for (const Scene* scene : scenes)
-	{
-		scene->OnDebugSelected();
-	}
+    for (const Scene* scene : scenes)
+    {
+        scene->OnDebugSelected();
+    }
 }
 
 void SceneModule::OnDisable()
 {
-	Module::OnDisable();
+    Module::OnDisable();
 
-	for (const Scene* scene : scenes)
-	{
-		scene->OnDisable();
-	}
+    for (const Scene* scene : scenes)
+    {
+        scene->OnDisable();
+    }
 }
 
 void SceneModule::OnEnable()
 {
-	Module::OnEnable();
+    Module::OnEnable();
 
-	for (const Scene* scene : scenes)
-	{
-		scene->OnEnable();
-	}
+    for (const Scene* scene : scenes)
+    {
+        scene->OnEnable();
+    }
 }
 
 void SceneModule::OnGUI()
 {
-	Module::OnGUI();
+    Module::OnGUI();
 
-	for (const Scene* scene : scenes)
-	{
-		scene->OnGUI();
-	}
+    for (const Scene* scene : scenes)
+    {
+        scene->OnGUI();
+    }
 }
 
 void SceneModule::PostRender()
 {
-	Module::PostRender();
+    Module::PostRender();
 
-	for (const Scene* scene : scenes)
-	{
-		scene->PostRender();
-	}
+    for (const Scene* scene : scenes)
+    {
+        scene->PostRender();
+    }
 }
 
 void SceneModule::PreRender()
 {
-	Module::PreRender();
+    Module::PreRender();
 
-	for (const Scene* scene : scenes)
-	{
-		scene->PreRender();
-	}
+    for (const Scene* scene : scenes)
+    {
+        scene->PreRender();
+    }
 }
 
 void SceneModule::Present()
 {
-	Module::Present();
+    Module::Present();
 
-	for (const Scene* scene : scenes)
-	{
-		scene->Present();
-	}
+    for (const Scene* scene : scenes)
+    {
+        scene->Present();
+    }
 }
 
 const std::vector<Scene*>& SceneModule::GetScenes() const
 {
-	return scenes;
+    return scenes;
 }
 
 Scene* SceneModule::GetScene(const std::string& _scene_name) const
 {
-	for (Scene* scene : scenes)
-	{
-		if (scene->GetName() == _scene_name)
-		{
-			return scene;
-		}
-	}
-	return nullptr;
+    for (Scene* scene : scenes)
+    {
+        if (scene->GetName() == _scene_name)
+        {
+            return scene;
+        }
+    }
+    return nullptr;
 }

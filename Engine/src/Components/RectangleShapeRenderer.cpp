@@ -39,8 +39,8 @@ void RectangleShapeRenderer::OnDebug()
 
     //sf::FloatRect bounds = shape->getGlobalBounds();
 
-    const Maths::Vector2f min = static_cast<Maths::Vector2f>(shape->getPosition());
-    const Maths::Vector2f size = static_cast<Maths::Vector2f>(shape->getSize());
+    const auto min = static_cast<Maths::Vector2f>(shape->getPosition());
+    const auto size = static_cast<Maths::Vector2f>(shape->getSize());
     const Maths::Vector2f max = min + size;
 
     //const ImU32 col = ImGuiUtilities::Red;

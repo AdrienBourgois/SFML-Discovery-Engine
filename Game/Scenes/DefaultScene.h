@@ -1,12 +1,13 @@
 #pragma once
 
-#include "GameObject.h"
 #include "Player.h"
-#include "RectangleShapeRenderer.h"
-#include "AssetsModule.h"
-#include "Scene.h"
-#include "SquareCollider.h"
-#include "Texture.h"
+#include "Assets/Texture.h"
+#include "Components/RectangleShapeRenderer.h"
+#include "Components/SpriteRenderer.h"
+#include "Components/SquareCollider.h"
+#include "Core/GameObject.h"
+#include "Core/Scene.h"
+#include "Modules/AssetsModule.h"
 
 class DefaultScene final : public Scene
 {
@@ -20,8 +21,10 @@ public:
 
 		GameObject* enemy2 = CreateDummyGameObject("Enemy2", 0.f, sf::Color::Green);
 
-		AssetsModule* resources_module = Engine::GetInstance()->GetModuleManager()->GetModule<AssetsModule>();
-		resources_module->LoadAsset<Texture>("logo.png");
+		AssetsModule* assets_module = Engine::GetInstance()->GetModuleManager()->GetModule<AssetsModule>();
+		Texture* texture = assets_module->LoadAsset<Texture>("logo.png");
+
+		player->CreateComponent<SpriteRenderer>(texture);
 	}
 
 	GameObject* CreateDummyGameObject(const std::string& _name, const float _position, const sf::Color _color)

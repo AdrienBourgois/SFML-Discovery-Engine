@@ -1,18 +1,18 @@
 #pragma once
-#include <SFML/Graphics/Sprite.hpp>
 
-#include "ARenderedComponent.h"
+#include "Assets/Texture.h"
+#include "Components/ARenderedComponent.h"
 
 class SpriteRenderer : public ARenderedComponent
 {
 public:
-	SpriteRenderer();
-	~SpriteRenderer() override;
+    explicit SpriteRenderer(Texture* _texture);
 
-	void SetSprite(sf::Sprite* _sprite) { sprite = _sprite; }
+    ~SpriteRenderer() override = default;
 
-	void Render(sf::RenderWindow* _window) override;
+    void Render(sf::RenderWindow* _window) override;
 
 private:
-	sf::Sprite* sprite = nullptr;
+    Texture* texture;
+    sf::Rect<int> rect;
 };

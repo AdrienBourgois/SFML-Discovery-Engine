@@ -4,13 +4,13 @@
 #include <source_location>
 
 enum class ELogLevel : char
-    {
-        Debug,
-        Info,
-        Warning,
-        Error,
-        Critical
-    };
+{
+    Debug,
+    Info,
+    Warning,
+    Error,
+    Critical
+};
 
 struct LogEntry
 {

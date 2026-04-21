@@ -3,7 +3,9 @@
 #include <iostream>
 #include <print>
 
-Logger::LogFormat::LogFormat(const char* _fmt, const std::source_location& _loc) : fmt(_fmt), loc(_loc) {}
+Logger::LogFormat::LogFormat(const char* _fmt, const std::source_location& _loc) : fmt(_fmt), loc(_loc)
+{
+}
 
 std::unique_ptr<Logger> Logger::instance(new Logger);
 

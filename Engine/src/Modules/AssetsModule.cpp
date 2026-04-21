@@ -18,6 +18,7 @@ void AssetsModule::UnloadAll()
 
 AssetsModule::~AssetsModule()
 {
+    UnloadAll();
 }
 
 std::filesystem::path AssetsModule::AssetsFolderPath;

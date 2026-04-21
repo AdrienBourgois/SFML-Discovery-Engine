@@ -1,5 +1,5 @@
 #pragma once
-#include "Component.h"
+#include "Core/Component.h"
 #include "InputModule.h"
 
 class Player : public Component

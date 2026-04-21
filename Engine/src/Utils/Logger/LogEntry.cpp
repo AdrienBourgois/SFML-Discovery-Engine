@@ -1,8 +1,10 @@
 ﻿#include "Utils/Logger/LogEntry.h"
 
-LogEntry::LogEntry(const ELogLevel _lvl, const std::string& _msg, const std::source_location& _loc)
-: timestamp(std::chrono::system_clock::now()), level(_lvl), message(_msg), sourceLocation(_loc)
-{}
+LogEntry::LogEntry(const ELogLevel _lvl, const std::string& _msg,
+                   const std::source_location& _loc) : timestamp(std::chrono::system_clock::now()), level(_lvl),
+                                                       message(_msg), sourceLocation(_loc)
+{
+}
 
 std::string LogEntry::ToString() const
 {

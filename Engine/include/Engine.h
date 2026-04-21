@@ -6,24 +6,24 @@
 class Engine
 {
 public:
-	static Engine* GetInstance();
+    static Engine* GetInstance();
 
-	void Init(int _argc, const char** _argv);
-	void Run() const;
-	void RequestQuit();
+    void Init(int _argc, const char** _argv);
+    void Run() const;
+    void RequestQuit();
 
-	bool IsQuitRequested() const;
+    bool IsQuitRequested() const;
 
-	ModuleManager* GetModuleManager() const;
+    ModuleManager* GetModuleManager() const;
 
 private:
-	static Engine* instance;
+    static Engine* instance;
 
-	Engine();
+    Engine();
 
-	ModuleManager* moduleManager = nullptr;
+    ModuleManager* moduleManager = nullptr;
 
-	EngineConfig config;
+    EngineConfig config;
 
-	bool quitRequested = false;
+    bool quitRequested = false;
 };

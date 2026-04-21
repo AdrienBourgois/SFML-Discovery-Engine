@@ -4,36 +4,36 @@
 
 void TimeModule::Awake()
 {
-	Module::Awake();
+    Module::Awake();
 
-	deltaClock.restart();
-	clock.restart();
+    deltaClock.restart();
+    clock.restart();
 }
 
 void TimeModule::Update()
 {
-	Module::Update();
+    Module::Update();
 
-	const sf::Time delta = deltaClock.restart();
-	deltaTime = delta.asSeconds();
+    const sf::Time delta = deltaClock.restart();
+    deltaTime = delta.asSeconds();
 }
 
 float TimeModule::GetDeltaTime() const
 {
-	return deltaTime;
+    return deltaTime;
 }
 
 float TimeModule::GetTimeSinceBeginning() const
 {
-	return clock.getElapsedTime().asSeconds();
+    return clock.getElapsedTime().asSeconds();
 }
 
 sf::Clock TimeModule::GetDeltaClock() const
 {
-	return deltaClock;
+    return deltaClock;
 }
 
 sf::Clock TimeModule::GetClockSinceBeginning() const
 {
-	return clock;
+    return clock;
 }

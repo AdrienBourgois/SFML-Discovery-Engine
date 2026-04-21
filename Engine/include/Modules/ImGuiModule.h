@@ -3,7 +3,7 @@
 #include <filesystem>
 
 #include "EngineConfig.h"
-#include "Module.h"
+#include "Core/Module.h"
 #include "SceneModule.h"
 #include "TimeModule.h"
 #include "WindowModule.h"
@@ -11,29 +11,29 @@
 class ImGuiModule final : public Module
 {
 public:
-	void Start() override;
-	void Update() override;
-	void PostRender() override;
-	void Finalize() override;
+    void Start() override;
+    void Update() override;
+    void PostRender() override;
+    void Finalize() override;
 
-	void DisplayDebugWindow();
-	void DisplayScenesList();
-	void DisplayGameObjectsList(const Scene* _scene);
-	void DisplayGameObjectItem(const GameObject* _game_object);
+    void DisplayDebugWindow();
+    void DisplayScenesList();
+    void DisplayGameObjectsList(const Scene* _scene);
+    void DisplayGameObjectItem(const GameObject* _game_object);
 
-	void DisplayGameObjectAsSelected(const GameObject* _game_object);
+    void DisplayGameObjectAsSelected(const GameObject* _game_object);
 
 private:
-	SceneModule* sceneModule = nullptr;
-	WindowModule* windowModule = nullptr;
-	TimeModule* timeModule = nullptr;
+    SceneModule* sceneModule = nullptr;
+    WindowModule* windowModule = nullptr;
+    TimeModule* timeModule = nullptr;
 
-	GameObject* selectedGameObject = nullptr;
+    GameObject* selectedGameObject = nullptr;
 
-	bool displayDebugWindow = false;
+    bool displayDebugWindow = false;
 
-	std::filesystem::path iniPath = EngineConfig::TempDirectoryPath / "imgui.ini";
+    std::filesystem::path iniPath = EngineConfig::TempDirectoryPath / "imgui.ini";
 
 protected:
-	~ImGuiModule() override = default;
+    ~ImGuiModule() override = default;
 };

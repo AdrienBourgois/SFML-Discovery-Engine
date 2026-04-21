@@ -9,134 +9,134 @@
 
 ModuleManager::~ModuleManager()
 {
-	Destroy();
-	modules.clear();
+    Destroy();
+    modules.clear();
 }
 
 void ModuleManager::CreateDefaultModules()
 {
-	CreateModule<TimeModule>();
-	CreateModule<InputModule>();
-	CreateModule<ImGuiModule>();
-	CreateModule<WindowModule>();
-	CreateModule<AssetsModule>();
-	CreateModule<SceneModule>();
+    CreateModule<TimeModule>();
+    CreateModule<InputModule>();
+    CreateModule<ImGuiModule>();
+    CreateModule<WindowModule>();
+    CreateModule<AssetsModule>();
+    CreateModule<SceneModule>();
 }
 
 void ModuleManager::AddModule(Module* _module)
 {
-	_module->moduleManager = this;
-	modules.push_back(_module);
+    _module->moduleManager = this;
+    modules.push_back(_module);
 }
 
 void ModuleManager::Awake() const
 {
-	for (Module* module : modules)
-	{
-		module->Awake();
-	}
+    for (Module* module : modules)
+    {
+        module->Awake();
+    }
 }
 
 void ModuleManager::Start() const
 {
-	for (Module* module : modules)
-	{
-		module->Start();
-	}
+    for (Module* module : modules)
+    {
+        module->Start();
+    }
 }
 
 void ModuleManager::Update() const
 {
-	for (Module* module : modules)
-	{
-		module->Update();
-	}
+    for (Module* module : modules)
+    {
+        module->Update();
+    }
 }
 
 void ModuleManager::PreRender() const
 {
-	for (Module* module : modules)
-	{
-		module->PreRender();
-	}
+    for (Module* module : modules)
+    {
+        module->PreRender();
+    }
 }
 
 void ModuleManager::Render() const
 {
-	for (Module* module : modules)
-	{
-		module->Render();
-	}
+    for (Module* module : modules)
+    {
+        module->Render();
+    }
 }
 
 void ModuleManager::OnGUI() const
 {
-	for (Module* module : modules)
-	{
-		module->OnGUI();
-	}
+    for (Module* module : modules)
+    {
+        module->OnGUI();
+    }
 }
 
 void ModuleManager::PostRender() const
 {
-	for (Module* module : modules)
-	{
-		module->PostRender();
-	}
+    for (Module* module : modules)
+    {
+        module->PostRender();
+    }
 }
 
 void ModuleManager::OnDebug() const
 {
-	for (Module* module : modules)
-	{
-		module->OnDebug();
-	}
+    for (Module* module : modules)
+    {
+        module->OnDebug();
+    }
 }
 
 void ModuleManager::OnDebugSelected() const
 {
-	for (Module* module : modules)
-	{
-		module->OnDebugSelected();
-	}
+    for (Module* module : modules)
+    {
+        module->OnDebugSelected();
+    }
 }
 
 void ModuleManager::Present() const
 {
-	for (Module* module : modules)
-	{
-		module->Present();
-	}
+    for (Module* module : modules)
+    {
+        module->Present();
+    }
 }
 
 void ModuleManager::OnEnable() const
 {
-	for (Module* module : modules)
-	{
-		module->OnEnable();
-	}
+    for (Module* module : modules)
+    {
+        module->OnEnable();
+    }
 }
 
 void ModuleManager::OnDisable() const
 {
-	for (Module* module : modules)
-	{
-		module->OnDisable();
-	}
+    for (Module* module : modules)
+    {
+        module->OnDisable();
+    }
 }
 
 void ModuleManager::Destroy() const
 {
-	for (Module* module : modules)
-	{
-		module->Destroy();
-	}
+    for (Module* module : modules)
+    {
+        module->Destroy();
+    }
 }
 
 void ModuleManager::Finalize() const
 {
-	for (Module* module : modules)
-	{
-		module->Finalize();
-	}
+    for (Module* module : modules)
+    {
+        module->Finalize();
+    }
 }

@@ -8,43 +8,43 @@
 
 void WindowModule::Awake()
 {
-	Module::Awake();
+    Module::Awake();
 
-	window = new sf::RenderWindow(sf::VideoMode({600, 600}), "SFML Discovery Engine");
+    window = new sf::RenderWindow(sf::VideoMode({600, 600}), "SFML Discovery Engine");
 }
 
 void WindowModule::PreRender()
 {
-	Module::PreRender();
+    Module::PreRender();
 
-	window->clear(sf::Color::Black);
+    window->clear(sf::Color::Black);
 }
 
 void WindowModule::Present()
 {
-	Module::Present();
+    Module::Present();
 
-	window->display();
+    window->display();
 }
 
 void WindowModule::Destroy()
 {
-	Module::Destroy();
+    Module::Destroy();
 
-	window->close();
+    window->close();
 }
 
 Maths::Vector2u WindowModule::GetSize() const
 {
-	return static_cast<Maths::Vector2u>(window->getSize());
+    return static_cast<Maths::Vector2u>(window->getSize());
 }
 
 void WindowModule::SetSize(const Maths::Vector2u _size) const
 {
-	window->setSize(sf::Vector2u(_size.x, _size.y));
+    window->setSize(sf::Vector2u(_size.x, _size.y));
 }
 
 void WindowModule::SetTitle(const std::string& _title) const
 {
-	window->setTitle(_title);
+    window->setTitle(_title);
 }

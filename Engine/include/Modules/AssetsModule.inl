@@ -2,10 +2,13 @@
 
 #include "Utils/Logger/Logger.h"
 
-template<typename AssetType, typename ... CtrParams> requires IsAsset<AssetType>
+template <typename AssetType, typename... CtrParams> requires IsAsset<AssetType>
 AssetType* AssetsModule::LoadAsset(const std::filesystem::path& _path, CtrParams&&... _params)
 {
-    const std::string path_string = _path.string();
+    const std::filesystem::path path = _path;
+    const std::filesystem::path full_path = AssetsFolderPath / path;
+
+    const std::string path_string = full_path.string();
 
     if (const AssetIterator it = assets.find(path_string); it != assets.end())
     {
@@ -14,9 +17,16 @@ AssetType* AssetsModule::LoadAsset(const std::filesystem::path& _path, CtrParams
         return dynamic_cast<AssetType*>(it->second.get());
     }
 
+    if (!Exists(full_path))
+    {
+        Logger::Log(ELogLevel::Error, "Asset file does not exist: {}, resolved full path: {}", path_string,
+                    full_path.string());
+        return nullptr;
+    }
+
     std::unique_ptr<AssetType> asset = std::make_unique<AssetType>(std::forward<CtrParams>(_params)...);
 
-    if (asset->Load(_path))
+    if (asset->Load(full_path))
     {
         AssetType* raw = asset.get();
         assets[path_string] = std::move(asset);

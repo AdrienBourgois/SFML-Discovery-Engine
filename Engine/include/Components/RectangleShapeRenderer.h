@@ -7,16 +7,19 @@
 class RectangleShapeRenderer : public ARenderedComponent
 {
 public:
-	RectangleShapeRenderer();
-	~RectangleShapeRenderer() override;
+    RectangleShapeRenderer();
+    ~RectangleShapeRenderer() override;
 
-	void SetColor(const sf::Color& _color) { color = _color; }
+    void SetColor(const sf::Color& _color)
+    {
+        color = _color;
+    }
 
-	void Render(sf::RenderWindow* _window) override;
-	void OnDebug() override;
+    void Render(sf::RenderWindow* _window) override;
+    void OnDebug() override;
 
 private:
-	sf::Color color = sf::Color::White;
+    sf::Color color = sf::Color::White;
 
-	sf::RectangleShape* shape = nullptr;
+    sf::RectangleShape* shape = nullptr;
 };

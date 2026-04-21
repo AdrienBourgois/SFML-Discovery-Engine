@@ -13,115 +13,115 @@
 
 void ImGuiModule::Start()
 {
-	Module::Start();
+    Module::Start();
 
-	windowModule = moduleManager->GetModule<WindowModule>();
-	timeModule = moduleManager->GetModule<TimeModule>();
-	sceneModule = moduleManager->GetModule<SceneModule>();
+    windowModule = moduleManager->GetModule<WindowModule>();
+    timeModule = moduleManager->GetModule<TimeModule>();
+    sceneModule = moduleManager->GetModule<SceneModule>();
 
-	if (const bool init_result = ImGui::SFML::Init(*windowModule->GetWindow()); !init_result)
-	{
-		Logger::Log(ELogLevel::Error, "Failed to initialize ImGui-SFML");
-	}
-	else
-	{
-		ImGui::GetIO().IniFilename = nullptr;
-		ImGui::LoadIniSettingsFromDisk(iniPath.string().c_str());
-	}
+    if (const bool init_result = ImGui::SFML::Init(*windowModule->GetWindow()); !init_result)
+    {
+        Logger::Log(ELogLevel::Error, "Failed to initialize ImGui-SFML");
+    }
+    else
+    {
+        ImGui::GetIO().IniFilename = nullptr;
+        ImGui::LoadIniSettingsFromDisk(iniPath.string().c_str());
+    }
 }
 
 void ImGuiModule::Update()
 {
-	Module::Update();
+    Module::Update();
 
-	std::vector<sf::Event> events = InputModule::GetEvents();
+    std::vector<sf::Event> events = InputModule::GetEvents();
 
-	for (sf::Event& event : events)
-		ImGui::SFML::ProcessEvent(*windowModule->GetWindow(), event);
+    for (sf::Event& event : events)
+        ImGui::SFML::ProcessEvent(*windowModule->GetWindow(), event);
 
-	ImGui::SFML::Update(*windowModule->GetWindow(), timeModule->GetDeltaClock().getElapsedTime());
+    ImGui::SFML::Update(*windowModule->GetWindow(), timeModule->GetDeltaClock().getElapsedTime());
 
-	if (InputModule::GetKeyDown(sf::Keyboard::Key::F1))
-	{
-		displayDebugWindow = !displayDebugWindow;
-	}
+    if (InputModule::GetKeyDown(sf::Keyboard::Key::F1))
+    {
+        displayDebugWindow = !displayDebugWindow;
+    }
 
-	if (displayDebugWindow)
-	{
-		DisplayDebugWindow();
-	}
+    if (displayDebugWindow)
+    {
+        DisplayDebugWindow();
+    }
 }
 
 void ImGuiModule::PostRender()
 {
-	Module::PostRender();
+    Module::PostRender();
 
-	ImGui::SFML::Render(*windowModule->GetWindow());
+    ImGui::SFML::Render(*windowModule->GetWindow());
 }
 
 void ImGuiModule::Finalize()
 {
-	Module::Finalize();
+    Module::Finalize();
 
-	ImGui::SaveIniSettingsToDisk(iniPath.string().c_str());
+    ImGui::SaveIniSettingsToDisk(iniPath.string().c_str());
 
-	ImGui::SFML::Shutdown();
+    ImGui::SFML::Shutdown();
 }
 
 void ImGuiModule::DisplayDebugWindow()
 {
-	ImGui::Begin("World Debug");
+    ImGui::Begin("World Debug");
 
-	ImGui::SeparatorText("Scenes");
+    ImGui::SeparatorText("Scenes");
 
-	DisplayScenesList();
+    DisplayScenesList();
 
-	ImGui::SeparatorText("Selected GameObject");
+    ImGui::SeparatorText("Selected GameObject");
 
-	DisplayGameObjectAsSelected(selectedGameObject);
+    DisplayGameObjectAsSelected(selectedGameObject);
 
-	ImGui::End();
+    ImGui::End();
 }
 
 void ImGuiModule::DisplayScenesList()
 {
-	const std::vector<Scene*> scenes = sceneModule->GetScenes();
+    const std::vector<Scene*> scenes = sceneModule->GetScenes();
 
-	for (const Scene* scene : scenes)
-	{
-		DisplayGameObjectsList(scene);
-	}
+    for (const Scene* scene : scenes)
+    {
+        DisplayGameObjectsList(scene);
+    }
 }
 
 void ImGuiModule::DisplayGameObjectsList(const Scene* _scene)
 {
-	constexpr ImGuiTreeNodeFlags base_flags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_SpanAvailWidth;
+    constexpr ImGuiTreeNodeFlags base_flags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_SpanAvailWidth;
 
-	if (ImGui::CollapsingHeader(_scene->GetName().c_str(), base_flags))
-	{
-		const std::vector<GameObject*>& game_objects = _scene->GetGameObjects();
-		for (const GameObject* game_object : game_objects)
-		{
-			DisplayGameObjectItem(game_object);
-		}
-	}
+    if (ImGui::CollapsingHeader(_scene->GetName().c_str(), base_flags))
+    {
+        const std::vector<GameObject*>& game_objects = _scene->GetGameObjects();
+        for (const GameObject* game_object : game_objects)
+        {
+            DisplayGameObjectItem(game_object);
+        }
+    }
 }
 
 void ImGuiModule::DisplayGameObjectItem(const GameObject* _game_object)
 {
-	if (ImGui::Selectable(_game_object->GetName().c_str(), selectedGameObject == _game_object))
-	{
-		selectedGameObject = const_cast<GameObject*>(_game_object);
-	}
+    if (ImGui::Selectable(_game_object->GetName().c_str(), selectedGameObject == _game_object))
+    {
+        selectedGameObject = const_cast<GameObject*>(_game_object);
+    }
 }
 
 void ImGuiModule::DisplayGameObjectAsSelected(const GameObject* _game_object)
 {
-	if (selectedGameObject == nullptr)
-	{
-		ImGui::Text("No GameObject selected");
-		return;
-	}
+    if (selectedGameObject == nullptr)
+    {
+        ImGui::Text("No GameObject selected");
+        return;
+    }
 
-	ImGui::Text("%s", _game_object->GetName().c_str());
+    ImGui::Text("%s", _game_object->GetName().c_str());
 }

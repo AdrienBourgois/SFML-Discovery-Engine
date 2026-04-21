@@ -2,14 +2,17 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 
-#include <Module.h>
+#include <Core/Module.h>
 
 #include "Maths/Vector2.h"
 
 class WindowModule final : public Module
 {
 public:
-    sf::RenderWindow* GetWindow() const { return window; }
+    sf::RenderWindow* GetWindow() const
+    {
+        return window;
+    }
 
     void Awake() override;
     void PreRender() override;
