@@ -1,7 +1,9 @@
 ﻿#pragma once
 
+#include "Engine.h"
+
 template <typename ComponentType>
-concept IsComponent = std::is_base_of_v<Component, ComponentType>;
+concept IsComponent = std::derived_from<ComponentType, Component>;
 
 template <class T> requires IsModule<T>
 T* Component::GetModule()

@@ -7,7 +7,7 @@
 class Scene
 {
 public:
-    explicit Scene(const std::string& _name);
+    explicit Scene(const std::string& _name, bool _enabled_at_start = true);
     virtual ~Scene() = default;
 
     void Awake() const;
@@ -31,11 +31,23 @@ public:
     const std::string& GetName() const;
 
     GameObject* CreateGameObject(const std::string& _name);
-    void DestroyGameObject(const GameObject* _game_object);
+
     GameObject* FindGameObject(const std::string& _name) const;
     const std::vector<GameObject*>& GetGameObjects() const;
+
+    void DestroyGameObject(const GameObject* _game_object);
+
+    void Enabled();
+    void Disabled();
+
+    bool IsEnabled() const;
 
 private:
     std::string name;
     std::vector<GameObject*> gameObjects;
+
+    bool enabled = true;
 };
+
+template<typename SceneType>
+concept IsScene = std::derived_from<SceneType, Scene>;

@@ -34,9 +34,9 @@ void ImGuiModule::Update()
 {
     Module::Update();
 
-    std::vector<sf::Event> events = InputModule::GetEvents();
+    const std::vector<sf::Event>& events = InputModule::GetEvents();
 
-    for (sf::Event& event : events)
+    for (const sf::Event& event : events)
         ImGui::SFML::ProcessEvent(*windowModule->GetWindow(), event);
 
     ImGui::SFML::Update(*windowModule->GetWindow(), timeModule->GetDeltaClock().getElapsedTime());
@@ -85,7 +85,7 @@ void ImGuiModule::DisplayDebugWindow()
 
 void ImGuiModule::DisplayScenesList()
 {
-    const std::vector<Scene*> scenes = sceneModule->GetScenes();
+    const std::vector<Scene*> scenes = sceneModule->GetScenesList();
 
     for (const Scene* scene : scenes)
     {

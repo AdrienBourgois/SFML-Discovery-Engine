@@ -1,7 +1,6 @@
 #pragma once
 
 #include <filesystem>
-#include <span>
 
 /**
  * \class Asset
@@ -42,4 +41,4 @@ protected:
 };
 
 template <typename AssetType>
-concept IsAsset = std::is_base_of_v<Asset, AssetType>;
+concept IsAsset = std::derived_from<AssetType, Asset>;

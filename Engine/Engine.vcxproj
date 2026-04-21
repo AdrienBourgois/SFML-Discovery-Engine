@@ -68,6 +68,7 @@
         <ClInclude Include="include\Maths\Vector2.h"/>
         <ClInclude Include="include\Components\SpriteRenderer.h"/>
         <ClInclude Include="include\ModuleManager.h"/>
+        <ClInclude Include="include\Modules\SceneModule.inl" />
         <ClInclude Include="include\Modules\TimeModule.h"/>
         <ClInclude Include="include\Modules\SceneModule.h"/>
         <ClInclude Include="include\Modules\WindowModule.h"/>

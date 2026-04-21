@@ -2,9 +2,10 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 
-Scene::Scene(const std::string& _name)
+Scene::Scene(const std::string& _name, const bool _enabled_at_start)
 {
     name = _name;
+    enabled = _enabled_at_start;
 }
 
 void Scene::Awake() const
@@ -160,4 +161,27 @@ GameObject* Scene::FindGameObject(const std::string& _name) const
 const std::vector<GameObject*>& Scene::GetGameObjects() const
 {
     return gameObjects;
+}
+
+void Scene::Enabled()
+{
+    if (!enabled)
+    {
+        enabled = true;
+        OnEnable();
+    }
+}
+
+void Scene::Disabled()
+{
+    if (enabled)
+    {
+        enabled = false;
+        OnDisable();
+    }
+}
+
+bool Scene::IsEnabled() const
+{
+    return enabled;
 }

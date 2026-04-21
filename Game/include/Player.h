@@ -28,6 +28,11 @@ public:
 		}
 
 		GetOwner()->SetPosition(position);
+
+		if (InputModule::GetKeyDown(sf::Keyboard::Key::Escape))
+		{
+			Engine::GetInstance()->RequestQuit();
+		}
 	}
 
 	float speed = 100.0f;

@@ -10,7 +10,7 @@ class SceneModule final : public Module
 {
 public:
     SceneModule();
-    ~SceneModule() override = default;
+    ~SceneModule() override;
 
     void Start() override;
     void Render() override;
@@ -28,41 +28,33 @@ public:
     void Present() override;
 
     template <typename T>
-    Scene* SetScene(bool _replace_scenes = true);
+    Scene* SetScene();
 
-    Scene* GetMainScene() const
-    {
-        return mainScene;
-    }
+    const std::vector<Scene*>& GetScenesList() const;
 
-    const std::vector<Scene*>& GetScenes() const;
-    Scene* GetScene(const std::string& _scene_name) const;
+    template <typename SceneType> requires IsScene<SceneType>
+    SceneType* CreateScene();
+
+    template <typename SceneType> requires IsScene<SceneType>
+    Scene* GetSceneByType() const;
+    Scene* GetSceneByName(const std::string& _scene_name) const;
+
+    template <typename SceneType> requires IsScene<SceneType>
+    bool DeleteSceneByType();
+    bool DeleteSceneByName(const std::string& _scene_name);
+
+    void DeleteAllScenes();
 
 private:
+    void ManageDeletedScenes();
+
     std::vector<Scene*> scenes;
-    Scene* mainScene = nullptr;
 
     WindowModule* windowModule = nullptr;
     TimeModule* timeModule = nullptr;
+
+    Scene* nextFrameScene = nullptr;
+    std::vector<Scene*> nextFrameScenesToDelete;
 };
 
-template <typename T>
-Scene* SceneModule::SetScene(const bool _replace_scenes)
-{
-    if (_replace_scenes)
-    {
-        for (const Scene* scene : scenes)
-        {
-            delete scene;
-        }
-        scenes.clear();
-    }
-
-    auto scene = static_cast<Scene*>(new T());
-    scenes.push_back(scene);
-
-    if (_replace_scenes)
-        mainScene = scene;
-
-    return scene;
-}
+#include "SceneModule.inl"

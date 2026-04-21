@@ -8,8 +8,7 @@ int main(const int _argc, const char** _argv)
 
     engine->Init(_argc, _argv);
 
-    SceneModule* scene_module = engine->GetModuleManager()->GetModule<SceneModule>();
-    scene_module->SetScene<DefaultScene>();
+    engine->GetModuleManager()->GetModule<SceneModule>()->SetScene<DefaultScene>();
 
     engine->Run();
 

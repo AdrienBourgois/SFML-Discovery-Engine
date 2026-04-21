@@ -1,12 +1,17 @@
 #include "Modules/SceneModule.h"
 
+#include <ranges>
+
 #include "ModuleManager.h"
 
 SceneModule::SceneModule() : Module()
 {
-    auto main_scene = new Scene("MainScene");
-    scenes.push_back(main_scene);
-    mainScene = main_scene;
+}
+
+SceneModule::~SceneModule()
+{
+    nextFrameScenesToDelete = scenes;
+    ManageDeletedScenes();
 }
 
 void SceneModule::Start()
@@ -150,21 +155,58 @@ void SceneModule::Present()
     {
         scene->Present();
     }
+
+    ManageDeletedScenes();
 }
 
-const std::vector<Scene*>& SceneModule::GetScenes() const
+const std::vector<Scene*>& SceneModule::GetScenesList() const
 {
     return scenes;
 }
 
-Scene* SceneModule::GetScene(const std::string& _scene_name) const
+Scene* SceneModule::GetSceneByName(const std::string& _scene_name) const
 {
-    for (Scene* scene : scenes)
+    if (const auto it = std::ranges::find(scenes, _scene_name, &Scene::GetName); it != scenes.end())
     {
-        if (scene->GetName() == _scene_name)
-        {
-            return scene;
-        }
+        return *it;
     }
+
+    Logger::Log(ELogLevel::Warning, "Scene with name {} not found.", _scene_name);
+
     return nullptr;
+}
+
+bool SceneModule::DeleteSceneByName(const std::string& _scene_name)
+{
+    if (Scene* scene = GetSceneByName(_scene_name))
+    {
+        nextFrameScenesToDelete.push_back(scene);
+        return true;
+    }
+
+    return false;
+}
+
+void SceneModule::DeleteAllScenes()
+{
+    nextFrameScenesToDelete.insert(nextFrameScenesToDelete.end(), scenes.begin(), scenes.end());
+}
+
+void SceneModule::ManageDeletedScenes()
+{
+    if (nextFrameScenesToDelete.empty())
+        return;
+
+    for (Scene* scenesToDelete : nextFrameScenesToDelete)
+    {
+        scenesToDelete->Disabled();
+        scenesToDelete->Destroy();
+        scenesToDelete->Finalize();
+
+        std::erase(scenes, scenesToDelete);
+
+        delete scenesToDelete;
+    }
+
+    nextFrameScenesToDelete.clear();
 }
