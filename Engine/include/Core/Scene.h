@@ -5,11 +5,11 @@
 
 #include "Core/GameObject.h"
 
+class GameObject;
+
 class Scene
 {
 public:
-
-
     explicit Scene(const std::string& _name, bool _enabled_at_start = true);
     virtual ~Scene() = default;
 
@@ -49,6 +49,8 @@ public:
     bool IsMarkedForDeletion() const;
 
 private:
+    void DeleteMarkedGameObjects();
+
     std::string name;
     std::vector<std::unique_ptr<GameObject>> gameObjects;
 

@@ -11,10 +11,12 @@
 class ImGuiModule final : public Module
 {
 public:
+    void Awake() override;
     void Start() override;
     void Update() override;
     void PostRender() override;
     void Finalize() override;
+    void OnDebug() override;
 
     void DisplayDebugWindow();
     void DisplayScenesList();
@@ -29,8 +31,6 @@ private:
     TimeModule* timeModule = nullptr;
 
     GameObject* selectedGameObject = nullptr;
-
-    bool displayDebugWindow = false;
 
     std::filesystem::path iniPath = EngineConfig::TempDirectoryPath / "imgui.ini";
 

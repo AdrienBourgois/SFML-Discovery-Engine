@@ -7,6 +7,10 @@ ComponentType* GameObject::CreateComponent(Args&&... _args)
 
     component->SetOwner(this);
 
+    component->Awake();
+    component->OnEnable();
+    component->Start();
+
     components.push_back(component);
     return component;
 }

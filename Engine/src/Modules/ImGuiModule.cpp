@@ -11,6 +11,11 @@
 #include "Modules/InputModule.h"
 #include "Modules/WindowModule.h"
 
+void ImGuiModule::Awake()
+{
+    Module::Awake();
+}
+
 void ImGuiModule::Start()
 {
     Module::Start();
@@ -43,12 +48,7 @@ void ImGuiModule::Update()
 
     if (InputModule::GetKeyDown(sf::Keyboard::Key::F1))
     {
-        displayDebugWindow = !displayDebugWindow;
-    }
-
-    if (displayDebugWindow)
-    {
-        DisplayDebugWindow();
+        Engine::GetInstance()->GetConfig().ToggleDebugMode();
     }
 }
 
@@ -66,6 +66,16 @@ void ImGuiModule::Finalize()
     ImGui::SaveIniSettingsToDisk(iniPath.string().c_str());
 
     ImGui::SFML::Shutdown();
+}
+
+void ImGuiModule::OnDebug()
+{
+    Module::OnDebug();
+
+    if (!Engine::GetInstance()->GetConfig().IsDebugMode())
+        return;
+
+    DisplayDebugWindow();
 }
 
 void ImGuiModule::DisplayDebugWindow()

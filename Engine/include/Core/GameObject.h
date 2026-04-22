@@ -6,6 +6,7 @@
 #include "Core/Component.h"
 #include "Maths/Vector2.h"
 
+class Scene;
 class Component;
 
 class GameObject
@@ -14,45 +15,21 @@ public:
     GameObject() = default;
     ~GameObject();
 
-    std::string GetName() const
-    {
-        return name;
-    }
+    std::string GetName() const;
 
-    Maths::Vector2<float> GetPosition() const
-    {
-        return position;
-    }
+    Maths::Vector2<float> GetPosition() const;
 
-    sf::Angle GetRotation() const
-    {
-        return rotation;
-    }
+    sf::Angle GetRotation() const;
 
-    Maths::Vector2<float> GetScale() const
-    {
-        return scale;
-    }
+    Maths::Vector2<float> GetScale() const;
 
-    void SetName(const std::string& _name)
-    {
-        name = _name;
-    }
+    void SetName(const std::string& _name);
 
-    void SetPosition(const Maths::Vector2<float>& _position)
-    {
-        position = _position;
-    }
+    void SetPosition(const Maths::Vector2<float>& _position);
 
-    void SetRotation(const sf::Angle _rotation)
-    {
-        rotation = _rotation;
-    }
+    void SetRotation(const sf::Angle _rotation);
 
-    void SetScale(const Maths::Vector2<float>& _scale)
-    {
-        scale = _scale;
-    }
+    void SetScale(const Maths::Vector2<float>& _scale);
 
     template <typename ComponentType, typename... Args> requires IsComponent<ComponentType>
     ComponentType* CreateComponent(Args&&... _args);
@@ -83,14 +60,29 @@ public:
     void Destroy() const;
     void Finalize() const;
 
+    void Enable();
+    void Disable();
+    bool IsEnabled() const;
+
+    void MarkForDeletion();
+    bool IsMarkedForDeletion() const;
+
+    void SetScene(Scene* _scene);
+    Scene* GetScene() const;
+
 private:
     std::string name = "GameObject";
+
+    bool enabled = true;
+    bool markedForDeletion = false;
 
     Maths::Vector2<float> position = Maths::Vector2f::Zero;
     sf::Angle rotation = sf::degrees(0.f);
     Maths::Vector2<float> scale = Maths::Vector2f::One;
 
     std::vector<Component*> components;
+
+    Scene* scene = nullptr;
 };
 
 #include "GameObject.inl"

@@ -63,6 +63,11 @@ ModuleManager* Engine::GetModuleManager() const
     return moduleManager;
 }
 
+EngineConfig& Engine::GetConfig()
+{
+    return config;
+}
+
 Engine* Engine::instance = nullptr;
 
 Engine::Engine()

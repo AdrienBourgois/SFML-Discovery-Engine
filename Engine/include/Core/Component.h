@@ -85,4 +85,7 @@ private:
     GameObject* owner = nullptr;
 };
 
+template <typename ComponentType>
+concept IsComponent = std::derived_from<ComponentType, Component>;
+
 #include "Component.inl"

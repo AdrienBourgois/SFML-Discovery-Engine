@@ -16,6 +16,22 @@ std::string EngineConfig::GetArg(const std::string& _arg) const
     return "";
 }
 
+bool EngineConfig::IsDebugMode() const
+{
+    return isDebugMode;
+}
+
+void EngineConfig::SetDebugMode(const bool _debug_mode)
+{
+    isDebugMode = _debug_mode;
+}
+
+bool EngineConfig::ToggleDebugMode()
+{
+    isDebugMode = !isDebugMode;
+    return isDebugMode;
+}
+
 void EngineConfig::ParseCommandLineArguments(const int _argc, const char** _argv)
 {
     commandLineArgs.clear();

@@ -15,6 +15,7 @@ public:
     bool IsQuitRequested() const;
 
     ModuleManager* GetModuleManager() const;
+    EngineConfig& GetConfig();
 
 private:
     static Engine* instance;

@@ -1,11 +1,45 @@
 #include "Core/GameObject.h"
 
+#include "Core/Scene.h"
+
 GameObject::~GameObject()
 {
     for (Component*& component : components)
         delete component;
 
     components.clear();
+}
+
+std::string GameObject::GetName() const {
+    return name;
+}
+
+Maths::Vector2<float> GameObject::GetPosition() const {
+    return position;
+}
+
+sf::Angle GameObject::GetRotation() const {
+    return rotation;
+}
+
+Maths::Vector2<float> GameObject::GetScale() const {
+    return scale;
+}
+
+void GameObject::SetName(const std::string& _name) {
+    name = _name;
+}
+
+void GameObject::SetPosition(const Maths::Vector2<float>& _position) {
+    position = _position;
+}
+
+void GameObject::SetRotation(const sf::Angle _rotation) {
+    rotation = _rotation;
+}
+
+void GameObject::SetScale(const Maths::Vector2<float>& _scale) {
+    scale = _scale;
 }
 
 std::vector<Component*>& GameObject::GetComponents()
@@ -23,8 +57,6 @@ void GameObject::RemoveComponent(Component* _component)
 {
     std::erase(components, _component);
 }
-
-#pragma region Events
 
 void GameObject::Awake() const
 {
@@ -138,4 +170,46 @@ void GameObject::Finalize() const
     }
 }
 
-#pragma endregion
+void GameObject::Enable()
+{
+    if (!enabled)
+    {
+        enabled = true;
+        OnEnable();
+    }
+}
+
+void GameObject::Disable()
+{
+    if (enabled)
+    {
+        enabled = false;
+        OnDisable();
+    }
+}
+
+bool GameObject::IsEnabled() const
+{
+    return enabled;
+}
+
+void GameObject::MarkForDeletion()
+{
+    Disable();
+    markedForDeletion = true;
+}
+
+bool GameObject::IsMarkedForDeletion() const
+{
+    return markedForDeletion;
+}
+
+void GameObject::SetScene(Scene* _scene)
+{
+    scene = _scene;
+}
+
+Scene* GameObject::GetScene() const
+{
+    return scene;
+}
