@@ -6,7 +6,7 @@
 class SpriteRenderer : public ARenderedComponent
 {
 public:
-    explicit SpriteRenderer(Texture* _texture);
+    explicit SpriteRenderer(Texture* _texture, bool _set_pivot_in_center = true);
 
     ~SpriteRenderer() override = default;
 

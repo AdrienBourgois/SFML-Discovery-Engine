@@ -88,6 +88,7 @@
         <RootNamespace>GameObjectLib</RootNamespace>
         <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
         <ProjectName>Engine</ProjectName>
+        <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </PropertyGroup>
 
     <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props"/>
@@ -140,6 +141,8 @@
             <PrecompiledHeader>NotUsing</PrecompiledHeader>
             <AdditionalIncludeDirectories>$(SolutionDir)include\ImGui-SFML;$(SolutionDir)include\ImGui;$(SolutionDir)include;$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
             <BuildStlModules>true</BuildStlModules>
+            <LanguageStandard>stdcpplatest</LanguageStandard>
+            <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
         </ClCompile>
         <Link>
             <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -156,18 +159,11 @@
         <ClCompile>
             <FunctionLevelLinking>true</FunctionLevelLinking>
             <IntrinsicFunctions>true</IntrinsicFunctions>
-            <LanguageStandard>stdcpplatest</LanguageStandard>
         </ClCompile>
         <Link>
             <EnableCOMDATFolding>true</EnableCOMDATFolding>
             <OptimizeReferences>true</OptimizeReferences>
         </Link>
-    </ItemDefinitionGroup>
-
-    <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-        <ClCompile>
-            <LanguageStandard>stdcpplatest</LanguageStandard>
-        </ClCompile>
     </ItemDefinitionGroup>
 
     <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets"/>

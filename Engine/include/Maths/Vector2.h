@@ -56,6 +56,9 @@ namespace Maths
          */
         explicit Vector2(ImVec2 _value);
 
+        template<typename U>
+        explicit Vector2(const sf::Vector2<U>& _value);
+
         /**  
          * \brief Copy constructor  
          */
@@ -78,6 +81,9 @@ namespace Maths
          */
         Vector2& operator=(const sf::Vector2<T>& _other);
 
+        template<typename U>
+        Vector2& operator=(const sf::Vector2<U>& _other);
+
         /**  
          * \brief Move assignment operator  
          */
@@ -89,6 +95,18 @@ namespace Maths
          * \return Reference to this  
          */
         Vector2& operator=(sf::Vector2<T>&& _other) noexcept;
+
+        /// Converting constructor from another Vector2<U>
+        template<typename U>
+        explicit Vector2(const Vector2<U>& _other);
+
+        /// Converting assignment from another Vector2<U>
+        template<typename U>
+        Vector2& operator=(const Vector2<U>& _other);
+
+        /// Explicit conversion operator to Vector2<U>
+        template<typename U>
+        explicit operator Vector2<U>() const;
 
         /**  
          * \brief Addition operator  

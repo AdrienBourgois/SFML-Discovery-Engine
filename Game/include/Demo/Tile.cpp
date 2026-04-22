@@ -12,7 +12,7 @@ void Demo::Tile::Start()
 {
     rectangle = GetOwner()->CreateComponent<RectangleShapeRenderer>();
     rectangle->SetColor(color);
-    rectangle->SetSize(Maths::Vector2f(size.x, size.y));
+    rectangle->SetSize(Maths::Vector2f(size));
 }
 
 void Demo::Tile::Update(float _delta_time)
@@ -23,13 +23,12 @@ void Demo::Tile::Update(float _delta_time)
 
 bool Demo::Tile::IsUnderCursor() const
 {
-    const Maths::Vector2i mouse_position = InputModule::GetMousePosition();
-    const Maths::Vector2f mouse_position_f = Maths::Vector2f(mouse_position.x, mouse_position.y);
+    const Maths::Vector2f mouse_position = static_cast<Maths::Vector2f>(InputModule::GetMousePosition());
 
     const Maths::Vector2f& position = GetOwner()->GetPosition();
     const Maths::Vector2f& size = rectangle->GetSize();
 
     const sf::Rect<float> tile_rect = sf::Rect(static_cast<sf::Vector2f>(position), static_cast<sf::Vector2f>(size));
 
-    return tile_rect.contains(static_cast<sf::Vector2f>(mouse_position_f));
+    return tile_rect.contains(static_cast<sf::Vector2f>(mouse_position));
 }

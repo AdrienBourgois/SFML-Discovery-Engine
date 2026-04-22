@@ -18,7 +18,7 @@ int RandomInt(const int _min, const int _max)
     thread_local std::mt19937_64 gen(static_cast<uint64_t>(std::chrono::steady_clock::now().time_since_epoch().count()));
 
     std::uniform_real_distribution dist(static_cast<float>(_min), static_cast<float>(_max));
-    return dist(gen);
+    return static_cast<int>(dist(gen));
 }
 
 Demo::DemoScene::DemoScene(): Scene("DemoScene")
@@ -43,9 +43,9 @@ void Demo::DemoScene::CreateRandomTile()
 
     const Maths::Vector2u window_size = Engine::GetInstance()->GetModuleManager()->GetModule<WindowModule>()->GetSize();
 
-    const int random_position_x = RandomInt(0, window_size.x);
-    const int random_position_y = RandomInt(0, window_size.y);
-    game_object->SetPosition(Maths::Vector2f(random_position_x, random_position_y));
+    const Maths::Vector2i random_position(RandomInt(0, window_size.x), RandomInt(0, window_size.y));
+
+    game_object->SetPosition(Maths::Vector2f(random_position));
 
     const int random_size = RandomInt(minSize, maxSize);
     game_object->CreateComponent<Tile>(color, Maths::Vector2i(random_size, random_size));

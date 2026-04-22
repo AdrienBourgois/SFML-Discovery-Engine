@@ -2,6 +2,7 @@
 
 #include <iostream>
 
+#include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Event.hpp>
 
 #include "Engine.h"
@@ -10,7 +11,7 @@ void WindowModule::Awake()
 {
     Module::Awake();
 
-    window = new sf::RenderWindow(sf::VideoMode({600, 600}), "SFML Discovery Engine");
+    window = std::make_unique<sf::RenderWindow>(sf::VideoMode({600, 600}), "SFML Discovery Engine");
 }
 
 void WindowModule::PreRender()
@@ -39,7 +40,7 @@ Maths::Vector2u WindowModule::GetSize() const
     return static_cast<Maths::Vector2u>(window->getSize());
 }
 
-void WindowModule::SetSize(const Maths::Vector2u _size) const
+void WindowModule::SetSize(const Maths::Vector2u& _size) const
 {
     window->setSize(sf::Vector2u(_size.x, _size.y));
 }

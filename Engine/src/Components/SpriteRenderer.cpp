@@ -1,13 +1,17 @@
 #include "Components/SpriteRenderer.h"
 
-SpriteRenderer::SpriteRenderer(Texture* _texture)
+SpriteRenderer::SpriteRenderer(Texture* _texture, const bool _set_pivot_in_center)
 {
     texture = _texture;
 
-    const sf::Vector2u size = texture->GetTexture().getSize();
+    size = texture->GetTexture().getSize();
 
-    rect = sf::IntRect(static_cast<sf::Vector2i>(Maths::Vector2i::Zero),
-                       sf::Vector2i(static_cast<int>(size.x), static_cast<int>(size.y)));
+    if (_set_pivot_in_center)
+        SetPivot(size / 2.0f);
+
+    const Maths::Vector2i size_i = static_cast<Maths::Vector2i>(size);
+
+    rect = sf::IntRect(static_cast<sf::Vector2i>(Maths::Vector2i::Zero), static_cast<sf::Vector2i>(size_i));
 }
 
 void SpriteRenderer::Render(sf::RenderWindow* _window)
@@ -18,9 +22,12 @@ void SpriteRenderer::Render(sf::RenderWindow* _window)
 
     sprite.setTextureRect(rect);
 
-    sprite.setPosition(static_cast<sf::Vector2f>(GetOwner()->GetPosition()));
-    sprite.setRotation(GetOwner()->GetRotation());
-    sprite.setScale(static_cast<sf::Vector2f>(GetOwner()->GetScale()));
+    const GameObject* owner = GetOwner();
+
+    sprite.setPosition(static_cast<sf::Vector2f>(owner->GetPosition()));
+    sprite.setOrigin(static_cast<sf::Vector2f>(GetPivot()));
+    sprite.setRotation(owner->GetRotation());
+    sprite.setScale(static_cast<sf::Vector2f>(owner->GetScale()));
 
     _window->draw(sprite);
 }

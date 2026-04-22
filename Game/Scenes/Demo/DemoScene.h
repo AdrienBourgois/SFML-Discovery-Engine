@@ -11,8 +11,8 @@ namespace Demo
 
         void CreateRandomTile();
 
-        float minSize = 100.f;
-        float maxSize = 300.f;
+        int minSize = 100;
+        int maxSize = 300;
     };
 }
 
