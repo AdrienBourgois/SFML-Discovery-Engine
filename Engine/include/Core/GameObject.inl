@@ -3,7 +3,7 @@
 template <typename ComponentType, typename... Args> requires IsComponent<ComponentType>
 ComponentType* GameObject::CreateComponent(Args&&... _args)
 {
-    ComponentType* component = new ComponentType(_args...);
+    ComponentType* component = new ComponentType(std::forward<Args>(_args)...);
 
     component->SetOwner(this);
 

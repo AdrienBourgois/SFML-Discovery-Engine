@@ -37,7 +37,8 @@ private:
 public:
     ~Logger();
 
-    static void Log(ELogLevel _level, LogFormat _format, auto&&... _args);
+    template<typename... Args>
+    static void Log(ELogLevel _level, LogFormat _format, Args&&... _args);
 };
 
 #include "Logger.inl"
