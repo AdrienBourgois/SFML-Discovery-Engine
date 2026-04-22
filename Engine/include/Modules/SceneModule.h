@@ -1,18 +1,17 @@
 #pragma once
-#include <vector>
+
 #include <memory>
+#include <vector>
 
 #include "Core/Module.h"
 #include "Core/Scene.h"
-#include "TimeModule.h"
-#include "WindowModule.h"
+
+#include "Modules/TimeModule.h"
+#include "Modules/WindowModule.h"
 
 class SceneModule final : public Module
 {
 public:
-    SceneModule();
-    ~SceneModule() override;
-
     void Start() override;
     void Render() override;
     void Update() override;

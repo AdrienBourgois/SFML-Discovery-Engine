@@ -1,6 +1,7 @@
 #pragma once
+
 #include "Core/Component.h"
-#include "InputModule.h"
+#include "Modules/InputModule.h"
 
 namespace Demo
 {

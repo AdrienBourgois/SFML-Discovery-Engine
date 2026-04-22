@@ -3,25 +3,25 @@
 #include "InputModule.h"
 #include "RectangleShapeRenderer.h"
 
-Tile::Tile(const sf::Color _color, const Maths::Vector2i& _size): color(_color), size(_size)
+Demo::Tile::Tile(const sf::Color _color, const Maths::Vector2i& _size): color(_color), size(_size)
 {
 
 }
 
-void Tile::Start()
+void Demo::Tile::Start()
 {
     rectangle = GetOwner()->CreateComponent<RectangleShapeRenderer>();
     rectangle->SetColor(color);
     rectangle->SetSize(Maths::Vector2f(size.x, size.y));
 }
 
-void Tile::Update(float _delta_time)
+void Demo::Tile::Update(float _delta_time)
 {
     if (InputModule::GetMouseButtonDown(sf::Mouse::Button::Left) && IsUnderCursor())
         GetOwner()->MarkForDeletion();
 }
 
-bool Tile::IsUnderCursor() const
+bool Demo::Tile::IsUnderCursor() const
 {
     const Maths::Vector2i mouse_position = InputModule::GetMousePosition();
     const Maths::Vector2f mouse_position_f = Maths::Vector2f(mouse_position.x, mouse_position.y);

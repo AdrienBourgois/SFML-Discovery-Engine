@@ -116,12 +116,14 @@ void Scene::Destroy() const
     }
 }
 
-void Scene::Finalize() const
+void Scene::Finalize()
 {
     for (const auto& game_object : gameObjects)
     {
         game_object->Finalize();
     }
+
+    DeleteMarkedGameObjects();
 }
 
 const std::string& Scene::GetName() const
@@ -194,8 +196,12 @@ bool Scene::IsEnabled() const
 
 void Scene::MarkForDeletion()
 {
-    markedForDeletion = true;
     Disable();
+
+    for (const auto& game_object : gameObjects)
+        game_object->MarkForDeletion();
+
+    markedForDeletion = true;
 }
 
 bool Scene::IsMarkedForDeletion() const

@@ -29,7 +29,7 @@ public:
     void OnDisable() const;
 
     void Destroy() const;
-    void Finalize() const;
+    void Finalize();
 
     const std::string& GetName() const;
 

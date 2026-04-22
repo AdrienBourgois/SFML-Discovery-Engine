@@ -39,6 +39,7 @@ void Component::Enable()
 void Component::Disable()
 {
     enabled = false;
+
     OnDisable();
 }
 
@@ -49,6 +50,7 @@ bool Component::IsMarkedForDeletion() const
 
 void Component::MarkForDeletion()
 {
-    markedForDeletion = true;
     Disable();
+
+    markedForDeletion = true;
 }

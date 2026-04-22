@@ -3,11 +3,6 @@
 #include <memory>
 #include "Core/Scene.h"
 
-GameObject::~GameObject()
-{
-    components.clear();
-}
-
 std::string GameObject::GetName() const {
     return name;
 }
@@ -151,12 +146,14 @@ void GameObject::Destroy() const
     }
 }
 
-void GameObject::Finalize() const
+void GameObject::Finalize()
 {
     for (const auto& component : components)
     {
         component->Finalize();
     }
+
+    DeleteMarkedComponents();
 }
 
 void GameObject::Enable()
@@ -185,6 +182,10 @@ bool GameObject::IsEnabled() const
 void GameObject::MarkForDeletion()
 {
     Disable();
+
+    for (const auto& component : components)
+        component->MarkForDeletion();
+
     markedForDeletion = true;
 }
 

@@ -13,9 +13,6 @@ class Component;
 class GameObject
 {
 public:
-    GameObject() = default;
-    ~GameObject();
-
     std::string GetName() const;
 
     Maths::Vector2<float> GetPosition() const;
@@ -28,7 +25,7 @@ public:
 
     void SetPosition(const Maths::Vector2<float>& _position);
 
-    void SetRotation(const sf::Angle _rotation);
+    void SetRotation(sf::Angle _rotation);
 
     void SetScale(const Maths::Vector2<float>& _scale);
 
@@ -56,7 +53,7 @@ public:
     void OnDisable() const;
 
     void Destroy() const;
-    void Finalize() const;
+    void Finalize();
 
     void Enable();
     void Disable();
