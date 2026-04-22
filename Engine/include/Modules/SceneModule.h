@@ -30,8 +30,6 @@ public:
     template <typename T>
     Scene* SetScene();
 
-    const std::vector<std::unique_ptr<Scene>>& GetScenesList() const;
-
     template <typename SceneType> requires IsScene<SceneType>
     SceneType* CreateScene();
 
@@ -39,10 +37,9 @@ public:
     Scene* GetSceneByType() const;
     Scene* GetSceneByName(const std::string& _scene_name) const;
 
-    template <typename SceneType> requires IsScene<SceneType>
-    bool DeleteSceneByType();
-    bool DeleteSceneByName(const std::string& _scene_name) const;
+    const std::vector<std::unique_ptr<Scene>>& GetScenesList() const;
 
+    bool DeleteSceneByName(const std::string& _scene_name) const;
     void DeleteAllScenes() const;
 
 private:

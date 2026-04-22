@@ -11,8 +11,10 @@ ComponentType* GameObject::CreateComponent(Args&&... _args)
     component->OnEnable();
     component->Start();
 
+    ComponentType* raw_ptr = component.get();
+
     components.push_back(std::move(component));
-    return component.get();
+    return raw_ptr;
 }
 
 template <typename ComponentType> requires IsComponent<ComponentType>

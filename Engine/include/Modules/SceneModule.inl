@@ -11,15 +11,15 @@ template <typename SceneType> requires IsScene<SceneType>
 SceneType* SceneModule::CreateScene()
 {
     auto scene = std::make_unique<SceneType>();
-    SceneType* rawPtr = scene.get();
+    SceneType* raw_ptr = scene.get();
     scenes.push_back(std::move(scene));
-    return rawPtr;
+    return raw_ptr;
 }
 
 template <typename SceneType> requires IsScene<SceneType>
 Scene* SceneModule::GetSceneByType() const
 {
-    for (auto scene : scenes)
+    for (const auto& scene : scenes)
     {
         if (dynamic_cast<SceneType*>(scene))
         {
@@ -30,16 +30,4 @@ Scene* SceneModule::GetSceneByType() const
     Logger::Log(ELogLevel::Warning, "SceneModule::GetSceneByType - No scene of type " + std::string(typeid(SceneType).name()) + " found.");
 
     return nullptr;
-}
-
-template <typename SceneType> requires IsScene<SceneType>
-bool SceneModule::DeleteSceneByType()
-{
-    if (auto* scene = GetSceneByType<SceneType>())
-    {
-        scene->MarkForDeletion();
-        return true;
-    }
-
-    return false;
 }
