@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Core/Component.h"
+#include "Core/Component.h"
 #include "Maths/Vector2.h"
 
 class ARenderedComponent : public Component

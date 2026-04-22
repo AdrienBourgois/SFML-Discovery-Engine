@@ -23,7 +23,7 @@ public:
     void OnDebug() const;
     void OnDebugSelected() const;
     void PostRender() const;
-    void Present() const;
+    void Present();
 
     void OnEnable() const;
     void OnDisable() const;

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Core/Scene.h"
-#include "Demo/Player.h"
 
 namespace Demo
 {
@@ -10,7 +9,10 @@ namespace Demo
     public:
         DemoScene();
 
-        GameObject* CreateDummyGameObject(const std::string& _name, float _position, sf::Color _color);
+        void CreateRandomTile();
+
+        float minSize = 100.f;
+        float maxSize = 300.f;
     };
 }
 

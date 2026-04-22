@@ -109,12 +109,14 @@
   </ItemDefinitionGroup>
 
   <ItemGroup>
+    <ClCompile Include="include\Demo\Tile.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Scenes\Demo\DemoScene.cpp" />
   </ItemGroup>
 
   <ItemGroup>
     <ClInclude Include="include\Demo\Player.h" />
+    <ClInclude Include="include\Demo\Tile.h" />
     <ClInclude Include="Scenes\Demo\DemoScene.h" />
   </ItemGroup>
 

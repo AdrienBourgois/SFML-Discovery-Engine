@@ -12,77 +12,46 @@ class Component
 public:
     virtual ~Component() = default;
 
-    virtual void Awake()
-    {
-    }
+    virtual void Awake();
+    virtual void Start();
+    virtual void Update(float _delta_time);
 
-    virtual void Start()
-    {
-    }
+    virtual void PreRender();
+    virtual void Render(sf::RenderWindow* _window);
+    virtual void OnGUI();
+    virtual void PostRender();
 
-    virtual void Update(float _delta_time)
-    {
-    }
+    virtual void OnDebug();
+    virtual void OnDebugSelected();
 
-    virtual void PreRender()
-    {
-    }
+    virtual void Present();
 
-    virtual void Render(sf::RenderWindow* _window)
-    {
-    }
+    virtual void OnEnable();
+    virtual void OnDisable();
 
-    virtual void OnGUI()
-    {
-    }
+    virtual void Destroy();
+    virtual void Finalize();
 
-    virtual void PostRender()
-    {
-    }
+    GameObject* GetOwner() const;
 
-    virtual void OnDebug()
-    {
-    }
-
-    virtual void OnDebugSelected()
-    {
-    }
-
-    virtual void Present()
-    {
-    }
-
-    virtual void OnEnable()
-    {
-    }
-
-    virtual void OnDisable()
-    {
-    }
-
-    virtual void Destroy()
-    {
-    }
-
-    virtual void Finalize()
-    {
-    }
-
-    GameObject* GetOwner() const
-    {
-        return owner;
-    }
-
-    void SetOwner(GameObject* _owner)
-    {
-        owner = _owner;
-    }
+    void SetOwner(GameObject* _owner);
 
     template <class T> requires IsModule<T>
     static T* GetModule();
 
+    bool IsEnabled() const;
+    void Enable();
+    void Disable();
+
+    bool IsMarkedForDeletion() const;
+    void MarkForDeletion();
+
 private:
     GameObject* owner = nullptr;
+
+    bool enabled = true;
+
+    bool markedForDeletion = false;
 };
 
 template <typename ComponentType>

@@ -3,7 +3,8 @@
 template <typename ComponentType, typename... Args> requires IsComponent<ComponentType>
 ComponentType* GameObject::CreateComponent(Args&&... _args)
 {
-    ComponentType* component = new ComponentType(std::forward<Args>(_args)...);
+    auto componentUP = std::make_unique<ComponentType>(std::forward<Args>(_args)...);
+    ComponentType* component = componentUP.get();
 
     component->SetOwner(this);
 
@@ -11,16 +12,16 @@ ComponentType* GameObject::CreateComponent(Args&&... _args)
     component->OnEnable();
     component->Start();
 
-    components.push_back(component);
+    components.push_back(std::move(componentUP));
     return component;
 }
 
 template <typename ComponentType> requires IsComponent<ComponentType>
 ComponentType* GameObject::GetComponent()
 {
-    for (Component* component : components)
+    for (const auto& componentUP : components)
     {
-        ComponentType* result = dynamic_cast<ComponentType*>(component);
+        ComponentType* result = dynamic_cast<ComponentType*>(componentUP.get());
         if (result != nullptr)
             return result;
     }
