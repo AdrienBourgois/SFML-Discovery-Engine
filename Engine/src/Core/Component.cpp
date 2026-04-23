@@ -32,15 +32,20 @@ bool Component::IsEnabled() const
 
 void Component::Enable()
 {
-    enabled = true;
-    OnEnable();
+    if (!enabled)
+    {
+        enabled = true;
+        OnEnable();
+    }
 }
 
 void Component::Disable()
 {
-    enabled = false;
-
-    OnDisable();
+    if (enabled)
+    {
+        enabled = false;
+        OnDisable();
+    }
 }
 
 bool Component::IsMarkedForDeletion() const

@@ -8,19 +8,29 @@ T* ModuleManager::CreateModule()
 
     T* module = new T();
     module->moduleManager = this;
-    modules.push_back(module);
+
+    module->Awake();
+    module->OnEnable();
+
+    pendingModules.push_back(module);
+
     return module;
 }
 
 template <class T> requires IsModule<T>
 T* ModuleManager::GetModule()
 {
-    for (Module*& module : modules)
+    for (Module* module : modules)
     {
         if (T* module_cast = dynamic_cast<T*>(module))
-        {
             return module_cast;
-        }
     }
+
+    for (Module* module : pendingModules)
+    {
+        if (T* module_cast = dynamic_cast<T*>(module))
+            return module_cast;
+    }
+
     return nullptr;
 }

@@ -12,6 +12,11 @@ SceneType* SceneModule::CreateScene()
 {
     auto scene = std::make_unique<SceneType>();
     SceneType* raw_ptr = scene.get();
+
+    scene->Awake();
+
+    scene->FlushPending();
+
     scenes.push_back(std::move(scene));
     return raw_ptr;
 }

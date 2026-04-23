@@ -25,6 +25,8 @@ public:
     void PostRender() const;
     void Present();
 
+    void FlushPending();
+
     void OnEnable() const;
     void OnDisable() const;
 
@@ -53,6 +55,8 @@ private:
 
     std::string name;
     std::vector<std::unique_ptr<GameObject>> gameObjects;
+
+    std::vector<std::unique_ptr<GameObject>> pendingGameObjects;
 
     bool enabled = true;
 

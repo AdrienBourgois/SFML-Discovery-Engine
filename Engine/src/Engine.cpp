@@ -17,28 +17,18 @@ void Engine::Init(const int _argc, const char** _argv)
 
     config.ParseCommandLineArguments(_argc, _argv);
 
-    moduleManager->CreateDefaultModules();
-    moduleManager->Awake();
+    moduleManager->Initialize();
+
+    Logger::Log(ELogLevel::Debug, "Engine Starting");
 }
 
 void Engine::Run() const
 {
-    Logger::Log(ELogLevel::Debug, "Engine Starting");
-
-    moduleManager->Start();
-    moduleManager->OnEnable();
-
     Logger::Log(ELogLevel::Debug, "Engine Running");
 
     while (!quitRequested)
     {
-        moduleManager->Update();
-        moduleManager->PreRender();
-        moduleManager->Render();
-        moduleManager->OnGUI();
-        moduleManager->OnDebug();
-        moduleManager->PostRender();
-        moduleManager->Present();
+        moduleManager->Tick();
     }
 
     Logger::Log(ELogLevel::Debug, "Engine Stopped");

@@ -10,11 +10,6 @@ void SceneModule::Start()
 
     timeModule = moduleManager->GetModule<TimeModule>();
     windowModule = moduleManager->GetModule<WindowModule>();
-
-    for (const auto& scene : scenes)
-    {
-        scene->Start();
-    }
 }
 
 void SceneModule::Render()
@@ -40,11 +35,6 @@ void SceneModule::Update()
 void SceneModule::Awake()
 {
     Module::Awake();
-
-    for (const auto& scene : scenes)
-    {
-        scene->Awake();
-    }
 }
 
 void SceneModule::Destroy()

@@ -30,6 +30,9 @@ void Scene::Update(const float _delta_time) const
 {
     for (const auto& game_object : gameObjects)
     {
+        if (!game_object->IsEnabled() || game_object->IsMarkedForDeletion())
+            continue;
+
         game_object->Update(_delta_time);
     }
 }
@@ -38,6 +41,9 @@ void Scene::PreRender() const
 {
     for (const auto& game_object : gameObjects)
     {
+        if (!game_object->IsEnabled() || game_object->IsMarkedForDeletion())
+            continue;
+
         game_object->PreRender();
     }
 }
@@ -46,6 +52,9 @@ void Scene::Render(sf::RenderWindow* _window) const
 {
     for (const auto& game_object : gameObjects)
     {
+        if (!game_object->IsEnabled() || game_object->IsMarkedForDeletion())
+            continue;
+
         game_object->Render(_window);
     }
 }
@@ -54,6 +63,9 @@ void Scene::OnGUI() const
 {
     for (const auto& game_object : gameObjects)
     {
+        if (!game_object->IsEnabled() || game_object->IsMarkedForDeletion())
+            continue;
+
         game_object->OnGUI();
     }
 }
@@ -62,6 +74,9 @@ void Scene::OnDebug() const
 {
     for (const auto& game_object : gameObjects)
     {
+        if (!game_object->IsEnabled() || game_object->IsMarkedForDeletion())
+            continue;
+
         game_object->OnDebug();
     }
 }
@@ -70,6 +85,9 @@ void Scene::OnDebugSelected() const
 {
     for (const auto& game_object : gameObjects)
     {
+        if (!game_object->IsEnabled() || game_object->IsMarkedForDeletion())
+            continue;
+
         game_object->OnDebugSelected();
     }
 }
@@ -78,6 +96,9 @@ void Scene::PostRender() const
 {
     for (const auto& game_object : gameObjects)
     {
+        if (!game_object->IsEnabled() || game_object->IsMarkedForDeletion())
+            continue;
+
         game_object->PostRender();
     }
 }
@@ -90,6 +111,32 @@ void Scene::Present()
     }
 
     DeleteMarkedGameObjects();
+
+    FlushPending();
+}
+
+void Scene::FlushPending()
+{
+    while (!pendingGameObjects.empty())
+    {
+        std::vector<std::unique_ptr<GameObject>> batch = std::move(pendingGameObjects);
+
+        for (auto& game_object : batch)
+        {
+            if (game_object->IsMarkedForDeletion())
+            {
+                game_object->Destroy();
+                game_object->Finalize();
+                continue;
+            }
+
+            game_object->FlushPending();
+
+            game_object->Start();
+
+            gameObjects.push_back(std::move(game_object));
+        }
+    }
 }
 
 void Scene::OnEnable() const
@@ -114,6 +161,11 @@ void Scene::Destroy() const
     {
         game_object->Destroy();
     }
+
+    for (const auto& game_object : pendingGameObjects)
+    {
+        game_object->Destroy();
+    }
 }
 
 void Scene::Finalize()
@@ -122,6 +174,12 @@ void Scene::Finalize()
     {
         game_object->Finalize();
     }
+
+    for (const auto& game_object : pendingGameObjects)
+    {
+        game_object->Finalize();
+    }
+    pendingGameObjects.clear();
 
     DeleteMarkedGameObjects();
 }
@@ -139,10 +197,9 @@ GameObject* Scene::CreateGameObject(const std::string& _name)
 
     game_object->Awake();
     game_object->OnEnable();
-    game_object->Start();
 
     GameObject* raw_ptr = game_object.get();
-    gameObjects.push_back(std::move(game_object));
+    pendingGameObjects.push_back(std::move(game_object));
     return raw_ptr;
 }
 
@@ -151,10 +208,15 @@ GameObject* Scene::FindGameObject(const std::string& _name) const
     for (const auto& game_object : gameObjects)
     {
         if (game_object->GetName() == _name)
-        {
             return game_object.get();
-        }
     }
+
+    for (const auto& game_object : pendingGameObjects)
+    {
+        if (game_object->GetName() == _name)
+            return game_object.get();
+    }
+
     return nullptr;
 }
 
@@ -165,9 +227,24 @@ const std::vector<std::unique_ptr<GameObject>>& Scene::GetGameObjects() const
 
 void Scene::DestroyGameObject(const GameObject* _game_object)
 {
-    std::erase_if(gameObjects, [_game_object](const std::unique_ptr<GameObject>& _obj)
+    for (const auto& game_object : gameObjects)
     {
-        return _obj.get() == _game_object;
+        if (game_object.get() == _game_object)
+        {
+            game_object->MarkForDeletion();
+            return;
+        }
+    }
+
+    std::erase_if(pendingGameObjects, [_game_object](const std::unique_ptr<GameObject>& _obj)
+    {
+        if (_obj.get() != _game_object)
+            return false;
+
+        _obj->Disable();
+        _obj->Destroy();
+        _obj->Finalize();
+        return true;
     });
 }
 
@@ -201,6 +278,9 @@ void Scene::MarkForDeletion()
     for (const auto& game_object : gameObjects)
         game_object->MarkForDeletion();
 
+    for (const auto& game_object : pendingGameObjects)
+        game_object->MarkForDeletion();
+
     markedForDeletion = true;
 }
 
@@ -218,8 +298,6 @@ void Scene::DeleteMarkedGameObjects()
 
         _game_object->Destroy();
         _game_object->Finalize();
-
-        Logger::Log(ELogLevel::Debug, "GameObject {} deleted.", _game_object->GetName());
 
         return true;
     });

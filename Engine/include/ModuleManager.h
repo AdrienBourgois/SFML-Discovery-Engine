@@ -12,6 +12,10 @@ public:
     void CreateDefaultModules();
     void AddModule(Module* _module);
 
+    void Initialize();
+    void Tick();
+    void Clean();
+
     void Awake() const;
     void Start() const;
     void Update() const;
@@ -36,8 +40,12 @@ public:
     template <class T> requires IsModule<T>
     T* GetModule();
 
+    void FlushPending();
+
 private:
     std::vector<Module*> modules;
+
+    std::vector<Module*> pendingModules;
 };
 
 #include "ModuleManager.inl"
