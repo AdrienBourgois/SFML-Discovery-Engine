@@ -4,9 +4,9 @@
 #include <SFML/Graphics/Texture.hpp>
 
 #include "Core/Asset.h"
-#include "Assets/SFMLAsset.h"
+#include "Assets/SfmlAsset.h"
 
-class Texture : public Asset, public SfmlAsset<sf::Texture>
+class Texture : public SfmlAsset<sf::Texture>
 {
 public:
     explicit Texture() = default;

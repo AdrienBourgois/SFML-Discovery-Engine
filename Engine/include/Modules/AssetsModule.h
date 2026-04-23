@@ -2,6 +2,8 @@
 
 #include <unordered_map>
 
+#include "Assets/Font.h"
+
 #include "Core/Module.h"
 
 #include "Core/Asset.h"
@@ -13,6 +15,8 @@ public:
     using AssetIterator = std::unordered_map<std::string, std::unique_ptr<Asset>>::iterator;
 
     AssetsModule();
+
+    void Awake() override;
 
     /**
      * \brief Checks if a file exists.
@@ -27,14 +31,18 @@ public:
     template <typename AssetType> requires IsAsset<AssetType>
     AssetType* GetAsset(const Path& _path);
 
+    Font* GetDefaultFont() const;
+
     void UnloadAll();
 
 private:
     ~AssetsModule() override;
 
-    static Path AssetsFolderPath;
+    static Path assetsFolderPath;
 
     std::unordered_map<std::string, std::unique_ptr<Asset>> assets;
+
+    Font* defaultFont = nullptr;
 };
 
 #include "AssetsModule.inl"

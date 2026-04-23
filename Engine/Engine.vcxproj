@@ -12,7 +12,9 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ClCompile Include="src\Assets\SFMLAsset.cpp"/>
+        <ClCompile Include="src\Assets\Font.cpp" />
+        <ClCompile Include="src\Assets\SfmlAsset.cpp" />
+        <ClCompile Include="src\Components\TextRenderer.cpp" />
         <ClCompile Include="src\Core\Asset.cpp"/>
         <ClCompile Include="src\Core\Component.cpp"/>
         <ClCompile Include="src\Core\GameObject.cpp"/>
@@ -47,7 +49,9 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ClInclude Include="include\Assets\SFMLAsset.h"/>
+        <ClInclude Include="include\Assets\Font.h" />
+        <ClInclude Include="include\Assets\SfmlAsset.h" />
+        <ClInclude Include="include\Components\TextRenderer.h" />
         <ClInclude Include="include\Core\Asset.h"/>
         <ClInclude Include="include\Core\Component.h"/>
         <ClInclude Include="include\Core\Component.inl"/>
@@ -140,12 +144,12 @@
             <ConformanceMode>true</ConformanceMode>
             <PrecompiledHeader>NotUsing</PrecompiledHeader>
             <AdditionalIncludeDirectories>$(SolutionDir)include\ImGui-SFML;$(SolutionDir)include\ImGui;$(SolutionDir)include;$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-            <BuildStlModules>true</BuildStlModules>
             <LanguageStandard>stdcpplatest</LanguageStandard>
             <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
         </ClCompile>
         <Link>
             <GenerateDebugInformation>true</GenerateDebugInformation>
+            <AdditionalOptions>/IGNORE:4099 %(AdditionalOptions)</AdditionalOptions>
         </Link>
         <PostBuildEvent>
             <Command>robocopy "$(SolutionDir)Assets" "$(OutDir)Assets" /MIR /XO if %ERRORLEVEL% LEQ 7 exit 0</Command>
@@ -153,6 +157,12 @@
             <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
             <RunPostBuildEvent>Always</RunPostBuildEvent>
         </PostBuildEvent>
+    </ItemDefinitionGroup>
+
+    <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+        <Link>
+            <AdditionalDependencies>sfml-graphics-s-d.lib;sfml-window-s-d.lib;sfml-system-s-d.lib;opengl32.lib;freetyped.lib;winmm.lib;gdi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+        </Link>
     </ItemDefinitionGroup>
 
     <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -163,6 +173,7 @@
         <Link>
             <EnableCOMDATFolding>true</EnableCOMDATFolding>
             <OptimizeReferences>true</OptimizeReferences>
+            <AdditionalDependencies>sfml-graphics-s.lib;sfml-window-s.lib;sfml-system-s.lib;opengl32.lib;freetype.lib;winmm.lib;gdi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
         </Link>
     </ItemDefinitionGroup>
 

@@ -1,1 +1,0 @@
-﻿#include "Assets/SFMLAsset.h"

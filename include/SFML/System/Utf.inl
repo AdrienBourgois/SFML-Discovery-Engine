@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////
 //
 // SFML - Simple and Fast Multimedia Library
-// Copyright (C) 2007-2024 Laurent Gomila (laurent@sfml-dev.org)
+// Copyright (C) 2007-2025 Laurent Gomila (laurent@sfml-dev.org)
 //
 // This software is provided 'as-is', without any express or implied warranty.
 // In no event will the authors be held liable for any damages arising from the use of this software.
@@ -337,7 +337,7 @@ In Utf<16>::decode(In begin, In end, char32_t& output, char32_t replacement)
     else
     {
         // We can make a direct copy
-        output = first;
+        output = static_cast<char32_t>(first);
     }
 
     return begin;

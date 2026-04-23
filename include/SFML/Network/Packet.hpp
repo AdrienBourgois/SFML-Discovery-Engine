@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////
 //
 // SFML - Simple and Fast Multimedia Library
-// Copyright (C) 2007-2024 Laurent Gomila (laurent@sfml-dev.org)
+// Copyright (C) 2007-2025 Laurent Gomila (laurent@sfml-dev.org)
 //
 // This software is provided 'as-is', without any express or implied warranty.
 // In no event will the authors be held liable for any damages arising from the use of this software.
@@ -190,10 +190,6 @@ public:
     ///    // ok, x was extracted successfully
     /// }
     /// \endcode
-    ///
-    /// Don't focus on the return type, it's equivalent to bool but
-    /// it disallows unwanted implicit conversions to integer or
-    /// pointer types.
     ///
     /// \return `true` if last data extraction from packet was successful
     ///

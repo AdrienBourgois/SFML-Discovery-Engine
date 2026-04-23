@@ -12,34 +12,34 @@ Engine* Engine::GetInstance()
 
 void Engine::Init(const int _argc, const char** _argv)
 {
-    Logger::Log(ELogLevel::Debug, "Engine Initialization Started");
-    Logger::Log(ELogLevel::Debug, "Working Directory : \"{}\"", std::filesystem::current_path().string());
+    Logger::Log(ELogLevel::Info, "Engine Initialization Started");
+    Logger::Log(ELogLevel::Info, "Working Directory : \"{}\"", std::filesystem::current_path().string());
 
     config.ParseCommandLineArguments(_argc, _argv);
 
-    moduleManager->Initialize();
+    Logger::Log(ELogLevel::Info, "Engine Starting");
 
-    Logger::Log(ELogLevel::Debug, "Engine Starting");
+    moduleManager->Initialize();
 }
 
 void Engine::Run() const
 {
-    Logger::Log(ELogLevel::Debug, "Engine Running");
+    Logger::Log(ELogLevel::Info, "Engine Running");
 
     while (!quitRequested)
     {
         moduleManager->Tick();
     }
 
-    Logger::Log(ELogLevel::Debug, "Engine Stopped");
+    moduleManager->Clean();
 
-    moduleManager->OnDisable();
-    moduleManager->Destroy();
-    moduleManager->Finalize();
+    Logger::Log(ELogLevel::Info, "Engine Closing");
 }
 
 void Engine::RequestQuit()
 {
+    Logger::Log(ELogLevel::Info, "Quit Requested");
+
     quitRequested = true;
 }
 

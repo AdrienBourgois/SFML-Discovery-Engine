@@ -25,7 +25,7 @@ public:
     void Destroy() override;
 
     Maths::Vector2u GetSize() const;
-    void SetSize(const Maths::Vector2u& _size) const;
+    void SetSize(const Maths::Vector2u& _size);
 
     void SetTitle(const std::string& _title) const;
 

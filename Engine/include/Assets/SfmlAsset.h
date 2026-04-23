@@ -1,10 +1,12 @@
 ﻿#pragma once
 
+#include "Core/Asset.h"
+
 template <typename SfmlType>
-class SfmlAsset
+class SfmlAsset : public Asset
 {
 public:
-    virtual ~SfmlAsset() = default;
+    ~SfmlAsset() override = default;
 
     virtual const SfmlType& GetSfmlAsset() = 0;
 

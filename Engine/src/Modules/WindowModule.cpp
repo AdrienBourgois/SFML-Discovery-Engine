@@ -1,11 +1,11 @@
 #include "Modules/WindowModule.h"
 
-#include <iostream>
-
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Event.hpp>
 
 #include "Engine.h"
+
+#include "Modules/ImGuiModule.h"
 
 void WindowModule::Awake()
 {
@@ -40,9 +40,9 @@ Maths::Vector2u WindowModule::GetSize() const
     return static_cast<Maths::Vector2u>(window->getSize());
 }
 
-void WindowModule::SetSize(const Maths::Vector2u& _size) const
+void WindowModule::SetSize(const Maths::Vector2u& _size)
 {
-    window->setSize(sf::Vector2u(_size.x, _size.y));
+    window->setSize(static_cast<sf::Vector2u>(_size));
 }
 
 void WindowModule::SetTitle(const std::string& _title) const

@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////
 //
 // SFML - Simple and Fast Multimedia Library
-// Copyright (C) 2007-2024 Laurent Gomila (laurent@sfml-dev.org)
+// Copyright (C) 2007-2025 Laurent Gomila (laurent@sfml-dev.org)
 //
 // This software is provided 'as-is', without any express or implied warranty.
 // In no event will the authors be held liable for any damages arising from the use of this software.
@@ -113,6 +113,10 @@ enum class Wheel
 ///
 /// \param position New position of the mouse
 ///
+/// \warning On macOS the OS API used for `setPosition` requires granting
+///     of Accessibility permission for your application.
+///     See also: https://support.apple.com/guide/mac-help/allow-accessibility-apps-to-access-your-mac-mh43185/
+///
 ////////////////////////////////////////////////////////////
 SFML_WINDOW_API void setPosition(Vector2i position);
 
@@ -124,6 +128,10 @@ SFML_WINDOW_API void setPosition(Vector2i position);
 ///
 /// \param position New position of the mouse
 /// \param relativeTo Reference window
+///
+/// \warning On macOS the OS API used for `setPosition` requires granting
+///     of Accessibility permission for your application.
+///     See also: https://support.apple.com/guide/mac-help/allow-accessibility-apps-to-access-your-mac-mh43185/
 ///
 ////////////////////////////////////////////////////////////
 SFML_WINDOW_API void setPosition(Vector2i position, const WindowBase& relativeTo);

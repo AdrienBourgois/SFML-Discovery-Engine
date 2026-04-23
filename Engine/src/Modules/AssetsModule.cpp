@@ -5,6 +5,28 @@
 #include "Engine.h"
 #include "EngineConfig.h"
 
+AssetsModule::AssetsModule()
+{
+    assetsFolderPath = std::filesystem::current_path() / EngineConfig::AssetsFolderName;
+}
+
+void AssetsModule::Awake()
+{
+    Module::Awake();
+
+    defaultFont = LoadAsset<Font>("Engine/Inter-VariableFont_opsz,wght.ttf");
+}
+
+bool AssetsModule::Exists(const Path& _path)
+{
+    return exists(_path);
+}
+
+Font* AssetsModule::GetDefaultFont() const
+{
+    return defaultFont;
+}
+
 void AssetsModule::UnloadAll()
 {
     for (std::unique_ptr<Asset>& asset : assets | std::views::values)
@@ -21,14 +43,4 @@ AssetsModule::~AssetsModule()
     UnloadAll();
 }
 
-std::filesystem::path AssetsModule::AssetsFolderPath;
-
-AssetsModule::AssetsModule()
-{
-    AssetsFolderPath = std::filesystem::current_path() / EngineConfig::AssetsFolderName;
-}
-
-bool AssetsModule::Exists(const Path& _path)
-{
-    return exists(_path);
-}
+std::filesystem::path AssetsModule::assetsFolderPath;
