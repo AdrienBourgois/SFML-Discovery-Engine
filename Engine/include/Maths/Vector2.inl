@@ -271,10 +271,17 @@ namespace Maths
 
 template <typename T>
 Maths::Vector2<T>::~Vector2() = default;
+template<typename T>
+template<typename U>
+Maths::Vector2<T>::Vector2(const sf::Vector2<U>& _value) : x(static_cast<T>(_value.x)), y(static_cast<T>(_value.y))
+{
+
+}
 template <typename T>
 Maths::Vector2<T>::Vector2(const Vector2& _other) = default;
 template <typename T>
 Maths::Vector2<T>::Vector2(Vector2&& _other) noexcept = default;
+
 template <typename T>
 Maths::Vector2<T>& Maths::Vector2<T>::operator=(const Vector2& _other) = default;
 
@@ -283,6 +290,15 @@ Maths::Vector2<T>& Maths::Vector2<T>::operator=(const sf::Vector2<T>& _other)
 {
     x = _other.x;
     y = _other.y;
+    return *this;
+}
+
+template<typename T>
+template<typename U>
+Maths::Vector2<T>& Maths::Vector2<T>::operator=(const sf::Vector2<U>& _other)
+{
+    x = static_cast<T>(_other.x);
+    y = static_cast<T>(_other.y);
     return *this;
 }
 
@@ -318,22 +334,6 @@ template<typename U>
 Maths::Vector2<T>::operator Vector2<U>() const
 {
     return Vector2<U>(static_cast<U>(x), static_cast<U>(y));
-}
-
-template<typename T>
-template<typename U>
-Maths::Vector2<T>::Vector2(const sf::Vector2<U>& _value) : x(static_cast<T>(_value.x)), y(static_cast<T>(_value.y))
-{
-
-}
-
-template<typename T>
-template<typename U>
-Maths::Vector2<T>& Maths::Vector2<T>::operator=(const sf::Vector2<U>& _other)
-{
-    x = static_cast<T>(_other.x);
-    y = static_cast<T>(_other.y);
-    return *this;
 }
 
 #pragma warning(pop)

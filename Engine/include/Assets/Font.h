@@ -1,6 +1,5 @@
 ﻿#pragma once
 
-#include "SFML/Config.hpp"
 #include "Assets/SfmlAsset.h"
 #include "SFML/Graphics/Font.hpp"
 

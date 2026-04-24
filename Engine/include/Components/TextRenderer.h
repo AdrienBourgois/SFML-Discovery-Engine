@@ -5,7 +5,7 @@
 #include "Assets/Font.h"
 
 #include "Components/ARenderedComponent.h"
-#include "Core/Component.h"
+// Note: Core/Component.h is already included transitively via ARenderedComponent.h
 
 class TextRenderer : public ARenderedComponent
 {

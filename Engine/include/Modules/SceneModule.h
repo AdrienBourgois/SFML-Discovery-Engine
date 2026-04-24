@@ -6,8 +6,9 @@
 #include "Core/Module.h"
 #include "Core/Scene.h"
 
-#include "Modules/TimeModule.h"
-#include "Modules/WindowModule.h"
+// Forward declarations — only raw pointers are stored as members
+class TimeModule;
+class WindowModule;
 
 class SceneModule final : public Module
 {

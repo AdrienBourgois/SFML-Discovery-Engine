@@ -1,7 +1,7 @@
 #include "Modules/ImGuiModule.h"
 
-#include <imgui-SFML.h>
-#include <imgui.h>
+#include <ImGui/imgui.h>
+#include <ImGui-SFML/imgui-SFML.h>
 
 #include <SFML/Window/Event.hpp>
 
@@ -9,6 +9,8 @@
 #include "ModuleManager.h"
 
 #include "Modules/InputModule.h"
+#include "Modules/SceneModule.h"
+#include "Modules/TimeModule.h"
 #include "Modules/WindowModule.h"
 
 void ImGuiModule::Awake()

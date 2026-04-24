@@ -1,6 +1,7 @@
 #include "Modules/InputModule.h"
 
-#include <imgui-SFML.h>
+#include <ImGui-SFML/imgui-SFML.h>
+#include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Event.hpp>
 
 #include "Engine.h"
@@ -90,9 +91,9 @@ bool InputModule::GetKeyUp(const sf::Keyboard::Key _key)
 Maths::Vector2i InputModule::mousePosition = Maths::Vector2i::Zero;
 Maths::Vector2i InputModule::mouseDelta = Maths::Vector2i::Zero;
 
-std::vector<sf::Event> InputModule::events;
+std::bitset<sf::Keyboard::KeyCount> InputModule::keyDown;
 
+std::bitset<sf::Keyboard::KeyCount> InputModule::keyUp;
 std::bitset<sf::Mouse::ButtonCount> InputModule::mouseDown;
 std::bitset<sf::Mouse::ButtonCount> InputModule::mouseUp;
-std::bitset<sf::Keyboard::KeyCount> InputModule::keyDown;
-std::bitset<sf::Keyboard::KeyCount> InputModule::keyUp;
+std::vector<sf::Event> InputModule::events;

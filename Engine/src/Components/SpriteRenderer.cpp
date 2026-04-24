@@ -1,5 +1,9 @@
 #include "Components/SpriteRenderer.h"
 
+#include <SFML/Graphics/RenderWindow.hpp>
+
+#include "Core/GameObject.h"
+
 SpriteRenderer::SpriteRenderer(Texture* _texture, const bool _set_pivot_in_center)
 {
     texture = _texture;

@@ -3,8 +3,8 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
 
-#include "Core/Asset.h"
 #include "Assets/SfmlAsset.h"
+#include "Core/Asset.h"
 
 class Texture : public SfmlAsset<sf::Texture>
 {

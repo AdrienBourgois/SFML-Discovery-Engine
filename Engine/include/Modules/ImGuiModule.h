@@ -4,9 +4,13 @@
 
 #include "EngineConfig.h"
 #include "Core/Module.h"
-#include "SceneModule.h"
-#include "TimeModule.h"
-#include "WindowModule.h"
+
+// Forward declarations — only pointers stored; Scene/GameObject used only as ref params in declarations
+class Scene;
+class GameObject;
+class SceneModule;
+class TimeModule;
+class WindowModule;
 
 class ImGuiModule final : public Module
 {

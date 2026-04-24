@@ -1,13 +1,19 @@
 #pragma once
 
 #include <bitset>
+#include <vector>
 
-#include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Mouse.hpp>
 
 #include "Core/Module.h"
 #include "Maths/Vector2.h"
+
+namespace sf
+{
+    class Event;
+    class RenderWindow;
+}
 
 class InputModule final : public Module
 {

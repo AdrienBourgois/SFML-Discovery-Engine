@@ -5,7 +5,6 @@
 
 #include "Core/GameObject.h"
 
-class GameObject;
 
 class Scene
 {

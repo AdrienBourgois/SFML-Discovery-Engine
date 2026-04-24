@@ -2,7 +2,11 @@
 
 #include <iostream>
 
-#include <imgui-SFML.h>
+#include <ImGui-SFML/imgui-SFML.h>
+
+#include <SFML/Graphics/RenderWindow.hpp>
+
+#include "Core/GameObject.h"
 
 #include "SFML/Graphics/Shape.hpp"
 #include "Utils/ImGuiUtilities.h"

@@ -1,5 +1,9 @@
 ﻿#include "Components/TextRenderer.h"
 
+#include <SFML/Graphics/RenderWindow.hpp>
+
+#include "Core/GameObject.h"
+
 #include "SFML/Graphics/Text.hpp"
 
 #include "Modules/AssetsModule.h"

@@ -12,77 +12,75 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ClCompile Include="src\Assets\Font.cpp" />
-        <ClCompile Include="src\Assets\SfmlAsset.cpp" />
-        <ClCompile Include="src\Components\TextRenderer.cpp" />
-        <ClCompile Include="src\Core\Asset.cpp"/>
-        <ClCompile Include="src\Core\Component.cpp"/>
-        <ClCompile Include="src\Core\GameObject.cpp"/>
-        <ClCompile Include="src\Core\Module.cpp"/>
-        <ClCompile Include="src\Core\Scene.cpp"/>
-        <ClCompile Include="src\EngineConfig.cpp"/>
-        <ClCompile Include="src\Modules\ImGuiModule.cpp"/>
-        <ClCompile Include="src\Engine.cpp"/>
-        <ClCompile Include="src\Modules\InputModule.cpp"/>
-        <ClCompile Include="src\Modules\AssetsModule.cpp"/>
-        <ClCompile Include="src\Modules\SceneModule.cpp"/>
-        <ClCompile Include="src\Modules\TimeModule.cpp"/>
-        <ClCompile Include="src\Modules\WindowModule.cpp"/>
-        <ClCompile Include="src\Utils\Logger\LogEntry.cpp"/>
-        <ClCompile Include="src\Utils\Logger\Logger.cpp"/>
-        <ClCompile Include="src\ModuleManager.cpp"/>
-        <ClCompile Include="src\Components\SpriteRenderer.cpp"/>
-        <ClCompile Include="src\Components\ARenderedComponent.cpp"/>
-        <ClCompile Include="src\Components\RectangleShapeRenderer.cpp"/>
-        <ClCompile Include="src\Assets\SpriteSheet.cpp"/>
-        <ClCompile Include="src\Assets\Texture.cpp"/>
-        <ClCompile Include="src\Components\SquareCollider.cpp"/>
-        <ClCompile Include="src\Maths\Vector2.cpp"/>
+        <ClCompile Include="ImGui\*.cpp">
+            <WarningLevel>TurnOffAllWarnings</WarningLevel>
+        </ClCompile>
     </ItemGroup>
 
     <ItemGroup>
-        <ClCompile Include="ImGui\*.cpp">
-            <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">TurnOffAllWarnings</WarningLevel>
-            <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-            <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(FileName)</PrecompiledHeaderFile>
-        </ClCompile>
+        <ClCompile Include="src\Assets\Font.cpp" />
+        <ClCompile Include="src\Assets\SfmlAsset.cpp" />
+        <ClCompile Include="src\Assets\SpriteSheet.cpp" />
+        <ClCompile Include="src\Assets\Texture.cpp" />
+        <ClCompile Include="src\Components\ARenderedComponent.cpp" />
+        <ClCompile Include="src\Components\RectangleShapeRenderer.cpp" />
+        <ClCompile Include="src\Components\SpriteRenderer.cpp" />
+        <ClCompile Include="src\Components\SquareCollider.cpp" />
+        <ClCompile Include="src\Components\TextRenderer.cpp" />
+        <ClCompile Include="src\Core\Asset.cpp" />
+        <ClCompile Include="src\Core\Component.cpp" />
+        <ClCompile Include="src\Core\GameObject.cpp" />
+        <ClCompile Include="src\Core\Module.cpp" />
+        <ClCompile Include="src\Core\Scene.cpp" />
+        <ClCompile Include="src\Engine.cpp" />
+        <ClCompile Include="src\EngineConfig.cpp" />
+        <ClCompile Include="src\Maths\Vector2.cpp" />
+        <ClCompile Include="src\ModuleManager.cpp" />
+        <ClCompile Include="src\Modules\AssetsModule.cpp" />
+        <ClCompile Include="src\Modules\ImGuiModule.cpp" />
+        <ClCompile Include="src\Modules\InputModule.cpp" />
+        <ClCompile Include="src\Modules\SceneModule.cpp" />
+        <ClCompile Include="src\Modules\TimeModule.cpp" />
+        <ClCompile Include="src\Modules\WindowModule.cpp" />
+        <ClCompile Include="src\Utils\Logger\LogEntry.cpp" />
+        <ClCompile Include="src\Utils\Logger\Logger.cpp" />
     </ItemGroup>
 
     <ItemGroup>
         <ClInclude Include="include\Assets\Font.h" />
         <ClInclude Include="include\Assets\SfmlAsset.h" />
+        <ClInclude Include="include\Assets\SpriteSheet.h" />
+        <ClInclude Include="include\Assets\Texture.h" />
+        <ClInclude Include="include\Components\ARenderedComponent.h" />
+        <ClInclude Include="include\Components\RectangleShapeRenderer.h" />
+        <ClInclude Include="include\Components\SpriteRenderer.h" />
+        <ClInclude Include="include\Components\SquareCollider.h" />
         <ClInclude Include="include\Components\TextRenderer.h" />
-        <ClInclude Include="include\Core\Asset.h"/>
-        <ClInclude Include="include\Core\Component.h"/>
-        <ClInclude Include="include\Core\Component.inl"/>
-        <ClInclude Include="include\Core\GameObject.h"/>
-        <ClInclude Include="include\Core\GameObject.inl"/>
-        <ClInclude Include="include\Core\Module.h"/>
-        <ClInclude Include="include\Core\Scene.h"/>
-        <ClInclude Include="include\EngineConfig.h"/>
-        <ClInclude Include="include\Modules\ImGuiModule.h"/>
-        <ClInclude Include="include\Engine.h"/>
-        <ClInclude Include="include\Components\ARenderedComponent.h"/>
-        <ClInclude Include="include\Components\RectangleShapeRenderer.h"/>
-        <ClInclude Include="include\Components\SquareCollider.h"/>
-        <ClInclude Include="include\Modules\AssetsModule.h"/>
-        <ClInclude Include="include\Modules\AssetsModule.inl"/>
-        <ClInclude Include="include\Assets\SpriteSheet.h"/>
-        <ClInclude Include="include\Assets\Texture.h"/>
-        <ClInclude Include="include\Maths\Vector2.h"/>
-        <ClInclude Include="include\Components\SpriteRenderer.h"/>
-        <ClInclude Include="include\ModuleManager.h"/>
+        <ClInclude Include="include\Core\Asset.h" />
+        <ClInclude Include="include\Core\Component.h" />
+        <ClInclude Include="include\Core\Component.inl" />
+        <ClInclude Include="include\Core\GameObject.h" />
+        <ClInclude Include="include\Core\GameObject.inl" />
+        <ClInclude Include="include\Core\Module.h" />
+        <ClInclude Include="include\Core\Scene.h" />
+        <ClInclude Include="include\Engine.h" />
+        <ClInclude Include="include\EngineConfig.h" />
+        <ClInclude Include="include\Maths\Vector2.h" />
+        <ClInclude Include="include\Maths\Vector2.inl" />
+        <ClInclude Include="include\ModuleManager.h" />
+        <ClInclude Include="include\ModuleManager.inl" />
+        <ClInclude Include="include\Modules\AssetsModule.h" />
+        <ClInclude Include="include\Modules\AssetsModule.inl" />
+        <ClInclude Include="include\Modules\ImGuiModule.h" />
+        <ClInclude Include="include\Modules\InputModule.h" />
+        <ClInclude Include="include\Modules\SceneModule.h" />
         <ClInclude Include="include\Modules\SceneModule.inl" />
-        <ClInclude Include="include\Modules\TimeModule.h"/>
-        <ClInclude Include="include\Modules\SceneModule.h"/>
-        <ClInclude Include="include\Modules\WindowModule.h"/>
-        <ClInclude Include="include\Modules\InputModule.h"/>
-        <ClInclude Include="include\Utils\ImGuiUtilities.h"/>
-        <ClInclude Include="include\Utils\Logger\LogEntry.h"/>
-        <ClInclude Include="include\Utils\Logger\Logger.h"/>
-        <ClInclude Include="include\Utils\Logger\Logger.inl"/>
-        <ClInclude Include="include\Maths\Vector2.inl"/>
-        <ClInclude Include="include\ModuleManager.inl"/>
+        <ClInclude Include="include\Modules\TimeModule.h" />
+        <ClInclude Include="include\Modules\WindowModule.h" />
+        <ClInclude Include="include\Utils\ImGuiUtilities.h" />
+        <ClInclude Include="include\Utils\Logger\LogEntry.h" />
+        <ClInclude Include="include\Utils\Logger\Logger.h" />
+        <ClInclude Include="include\Utils\Logger\Logger.inl" />
     </ItemGroup>
 
     <PropertyGroup Label="Globals">
@@ -92,68 +90,64 @@
         <RootNamespace>GameObjectLib</RootNamespace>
         <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
         <ProjectName>Engine</ProjectName>
-        <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </PropertyGroup>
 
-    <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props"/>
+    <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
 
     <PropertyGroup Label="Configuration">
         <ConfigurationType>StaticLibrary</ConfigurationType>
         <PlatformToolset>v143</PlatformToolset>
         <CharacterSet>Unicode</CharacterSet>
-        <LocalDebuggerWorkingDirectory>$(SolutionDir)</LocalDebuggerWorkingDirectory>
     </PropertyGroup>
 
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
         <UseDebugLibraries>true</UseDebugLibraries>
     </PropertyGroup>
 
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
         <UseDebugLibraries>false</UseDebugLibraries>
         <WholeProgramOptimization>true</WholeProgramOptimization>
     </PropertyGroup>
 
-    <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props"/>
+    <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
 
     <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
         <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props"
                 Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')"
-                Label="LocalAppDataPlatform"/>
+                Label="LocalAppDataPlatform" />
     </ImportGroup>
 
     <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
         <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props"
                 Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')"
-                Label="LocalAppDataPlatform"/>
+                Label="LocalAppDataPlatform" />
     </ImportGroup>
 
-    <PropertyGroup Label="UserMacros"/>
+    <PropertyGroup Label="UserMacros" />
 
     <PropertyGroup>
-        <PublicIncludeDirectories>$(ProjectDir)include\;$(PublicIncludeDirectories)</PublicIncludeDirectories>
+        <PublicIncludeDirectories>$(ProjectDir)include;$(PublicIncludeDirectories)</PublicIncludeDirectories>
         <AllProjectIncludesArePublic>true</AllProjectIncludesArePublic>
-        <IncludePath>$(ProjectDir)include;$(IncludePath)</IncludePath>
-        <ExternalIncludePath>$(SolutionDir)include\ImGui-SFML;$(SolutionDir)include\ImGui;$(SolutionDir)include;$(ExternalIncludePath)</ExternalIncludePath>
     </PropertyGroup>
 
     <ItemDefinitionGroup>
         <ClCompile>
             <WarningLevel>Level3</WarningLevel>
             <SDLCheck>true</SDLCheck>
-            <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
             <ConformanceMode>true</ConformanceMode>
             <PrecompiledHeader>NotUsing</PrecompiledHeader>
-            <AdditionalIncludeDirectories>$(SolutionDir)include\ImGui-SFML;$(SolutionDir)include\ImGui;$(SolutionDir)include;$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
             <LanguageStandard>stdcpplatest</LanguageStandard>
             <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
+            <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+            <AdditionalIncludeDirectories>$(SolutionDir)include;$(SolutionDir)include\ImGui;$(SolutionDir)include\ImGui-SFML;$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
         </ClCompile>
         <Link>
             <GenerateDebugInformation>true</GenerateDebugInformation>
             <AdditionalOptions>/IGNORE:4099 %(AdditionalOptions)</AdditionalOptions>
         </Link>
         <PostBuildEvent>
-            <Command>robocopy "$(SolutionDir)Assets" "$(OutDir)Assets" /MIR /XO if %ERRORLEVEL% LEQ 7 exit 0</Command>
-            <Message>Copy Engine Assets folder with in Output directory</Message>
+            <Command>robocopy "$(SolutionDir)Assets" "$(OutDir)Assets" /MIR /XO &amp; if %ERRORLEVEL% LEQ 7 exit 0</Command>
+            <Message>Sync Assets → $(OutDir)Assets</Message>
             <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
             <RunPostBuildEvent>Always</RunPostBuildEvent>
         </PostBuildEvent>
@@ -177,5 +171,6 @@
         </Link>
     </ItemDefinitionGroup>
 
-    <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets"/>
+    <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
 </Project>
+

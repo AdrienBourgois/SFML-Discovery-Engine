@@ -1,8 +1,8 @@
 #pragma once
 
-#include <SFML/Graphics/RenderWindow.hpp>
+// Forward declaration — RenderWindow is only used as a pointer in this header
+namespace sf { class RenderWindow; }
 
-#include "GameObject.h"
 #include "Module.h"
 
 class GameObject;
