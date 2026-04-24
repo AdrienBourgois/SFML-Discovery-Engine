@@ -9,6 +9,7 @@
 #include "Texture.h"
 #include "WindowModule.h"
 
+#include "Demo/TileCounter.h"
 #include "Demo/TileSpawner.h"
 
 Demo::DemoScene::DemoScene(): Scene("DemoScene")
@@ -19,8 +20,8 @@ Demo::DemoScene::DemoScene(): Scene("DemoScene")
     GameObject* const& logo = CreateGameObject("SFML Logo");
     logo->CreateComponent<SpriteRenderer>(logo_texture, false);
 
-    CreateGameObject("TileSpawner")->CreateComponent<TileSpawner>();
-
-    TextRenderer* text_renderer = CreateGameObject("Text")->CreateComponent<TextRenderer>("Hello World!");
-    text_renderer->SetColor(sf::Color::Yellow);
+    GameObject* tile_spawner = CreateGameObject("TileSpawner");
+    tile_spawner->CreateComponent<TileSpawner>();
+    tile_spawner->CreateComponent<TileCounter>();
+    tile_spawner->SetPosition({200, 0});
 }

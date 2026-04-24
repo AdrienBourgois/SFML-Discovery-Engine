@@ -1,5 +1,7 @@
 #include "Engine.h"
 
+#include "SFML/Config.hpp"
+
 #include "Utils/Logger/Logger.h"
 
 Engine* Engine::GetInstance()
@@ -12,6 +14,9 @@ Engine* Engine::GetInstance()
 
 void Engine::Init(const int _argc, const char** _argv)
 {
+    Logger::Log(ELogLevel::Info, "SFML Discovery Engine - Version {}", EngineConfig::EngineVersion);
+    Logger::Log(ELogLevel::Info, "Compiled on {} with SFML {}.{}.{}", __DATE__, SFML_VERSION_MAJOR, SFML_VERSION_MINOR, SFML_VERSION_PATCH);
+
     Logger::Log(ELogLevel::Info, "Engine Initialization Started");
     Logger::Log(ELogLevel::Info, "Working Directory : \"{}\"", std::filesystem::current_path().string());
 

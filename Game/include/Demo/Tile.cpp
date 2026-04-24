@@ -2,6 +2,8 @@
 
 #include "InputModule.h"
 #include "RectangleShapeRenderer.h"
+#include "Scene.h"
+#include "TileSpawner.h"
 
 Demo::Tile::Tile(const sf::Color _color, const Maths::Vector2i& _size): color(_color), size(_size)
 {
@@ -18,7 +20,14 @@ void Demo::Tile::Start()
 void Demo::Tile::Update(float _delta_time)
 {
     if (InputModule::GetMouseButtonDown(sf::Mouse::Button::Left) && IsUnderCursor())
-        GetOwner()->MarkForDeletion();
+    {
+        GameObject* tile_spawner = GetOwner()->GetScene()->FindGameObject("TileSpawner");
+        if (tile_spawner)
+        {
+            tile_spawner->GetComponent<TileSpawner>()->TileRemoved();
+            GetOwner()->MarkForDeletion();
+        }
+    }
 }
 
 bool Demo::Tile::IsUnderCursor() const

@@ -8,7 +8,15 @@ bool Font::Load(const std::filesystem::path& _path)
 
     font = std::make_unique<sf::Font>();
 
-    return font->openFromFile(path);
+    if (!font->openFromFile(path))
+    {
+        Logger::Log(ELogLevel::Error, "Failed to load font: {}", _path.string());
+        return false;
+    }
+
+    Logger::Log(ELogLevel::Debug, "Font loaded successfully: {}", _path.string());
+
+    return true;
 }
 
 bool Font::Unload()

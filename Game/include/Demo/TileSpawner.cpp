@@ -5,6 +5,7 @@
 #include "InputModule.h"
 #include "Scene.h"
 #include "Tile.h"
+#include "TileCounter.h"
 #include "WindowModule.h"
 
 void Demo::TileSpawner::Start()
@@ -43,6 +44,15 @@ void Demo::TileSpawner::SpawnTile()
 
     const int random_size = RandomInt(minSize, maxSize);
     game_object->CreateComponent<Tile>(color, Maths::Vector2i(random_size, random_size));
+
+    tileCount++;
+    GetOwner()->GetComponent<TileCounter>()->SetTileCount(tileCount);
+}
+
+void Demo::TileSpawner::TileRemoved()
+{
+    tileCount--;
+    GetOwner()->GetComponent<TileCounter>()->SetTileCount(tileCount);
 }
 
 int Demo::TileSpawner::RandomInt(const int _min, const int _max)

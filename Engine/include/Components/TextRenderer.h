@@ -24,6 +24,9 @@ public:
     sf::Color GetColor() const;
     void SetColor(sf::Color _color);
 
+    int GetCharacterSize() const;
+    void SetCharacterSize(int _size);
+
 private:
     std::unique_ptr<sf::Text> sfmlText;
 
