@@ -12,6 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ClCompile Include="pch.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+      <ForcedIncludeFiles />
+    </ClCompile>
     <ClCompile Include="main.cpp" />
   </ItemGroup>
 
@@ -26,6 +30,7 @@
     <ClInclude Include="include\Demo\Tile.h" />
     <ClInclude Include="include\Demo\TileCounter.h" />
     <ClInclude Include="include\Demo\TileSpawner.h" />
+    <ClInclude Include="include\pch.h" />
     <ClInclude Include="Scenes\Demo\DemoScene.h" />
   </ItemGroup>
 
@@ -63,9 +68,6 @@
 
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
 
-  <ImportGroup Label="ExtensionSettings" />
-  <ImportGroup Label="Shared" />
-
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props"
             Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')"
@@ -78,8 +80,6 @@
             Label="LocalAppDataPlatform" />
   </ImportGroup>
 
-  <PropertyGroup Label="UserMacros" />
-
   <PropertyGroup>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
     <LocalDebuggerWorkingDirectory>$(SolutionDir)</LocalDebuggerWorkingDirectory>
@@ -91,6 +91,10 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <ForcedIncludeFiles>pch.h</ForcedIncludeFiles>
       <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)include;$(SolutionDir)include\ImGui;$(SolutionDir)include\ImGui-SFML;$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>

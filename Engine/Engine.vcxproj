@@ -14,10 +14,16 @@
     <ItemGroup>
         <ClCompile Include="ImGui\*.cpp">
             <WarningLevel>TurnOffAllWarnings</WarningLevel>
+            <PrecompiledHeader>NotUsing</PrecompiledHeader>
+            <ForcedIncludeFiles />
         </ClCompile>
     </ItemGroup>
 
     <ItemGroup>
+        <ClCompile Include="src\pch.cpp">
+            <PrecompiledHeader>Create</PrecompiledHeader>
+            <ForcedIncludeFiles />
+        </ClCompile>
         <ClCompile Include="src\Assets\Font.cpp" />
         <ClCompile Include="src\Assets\SfmlAsset.cpp" />
         <ClCompile Include="src\Assets\SpriteSheet.cpp" />
@@ -77,6 +83,7 @@
         <ClInclude Include="include\Modules\SceneModule.inl" />
         <ClInclude Include="include\Modules\TimeModule.h" />
         <ClInclude Include="include\Modules\WindowModule.h" />
+        <ClInclude Include="include\pch.h" />
         <ClInclude Include="include\Utils\ImGuiUtilities.h" />
         <ClInclude Include="include\Utils\Logger\LogEntry.h" />
         <ClInclude Include="include\Utils\Logger\Logger.h" />
@@ -123,8 +130,6 @@
                 Label="LocalAppDataPlatform" />
     </ImportGroup>
 
-    <PropertyGroup Label="UserMacros" />
-
     <PropertyGroup>
         <PublicIncludeDirectories>$(ProjectDir)include;$(PublicIncludeDirectories)</PublicIncludeDirectories>
         <AllProjectIncludesArePublic>true</AllProjectIncludesArePublic>
@@ -134,10 +139,13 @@
         <ClCompile>
             <WarningLevel>Level3</WarningLevel>
             <SDLCheck>true</SDLCheck>
-            <ConformanceMode>true</ConformanceMode>
-            <PrecompiledHeader>NotUsing</PrecompiledHeader>
+            <MultiProcessorCompilation>true</MultiProcessorCompilation>
+            <PrecompiledHeader>Use</PrecompiledHeader>
+            <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+            <ForcedIncludeFiles>pch.h</ForcedIncludeFiles>
             <LanguageStandard>stdcpplatest</LanguageStandard>
             <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
+            <MultiProcessorCompilation>true</MultiProcessorCompilation>
             <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
             <AdditionalIncludeDirectories>$(SolutionDir)include;$(SolutionDir)include\ImGui;$(SolutionDir)include\ImGui-SFML;$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
         </ClCompile>
