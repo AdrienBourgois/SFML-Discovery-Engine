@@ -1,35 +1,36 @@
 #pragma once
 
+#include "SpriteRenderer.h"
+
 #include "Core/Component.h"
 
 class SquareCollider : public Component
 {
 public:
-    SquareCollider() = default;
-    ~SquareCollider() override = default;
+    SquareCollider();
+    explicit SquareCollider(const SpriteRenderer* _sprite);
 
-    float width = 1.0f;
-    float height = 1.0f;
+    ~SquareCollider() override;
 
-    float GetWidth() const
-    {
-        return width;
-    }
+    void CopyFromSpriteRenderer(const SpriteRenderer* _sprite);
 
-    float GetHeight() const
-    {
-        return height;
-    }
+    void Render(sf::RenderWindow* _window) override;
 
-    void SetWidth(const float _width)
-    {
-        width = _width;
-    }
+    Maths::Vector2f GetSize() const;
+    void SetSize(const Maths::Vector2f& _size);
 
-    void SetHeight(const float _height)
-    {
-        height = _height;
-    }
+    float GetWidth() const;
+    float GetHeight() const;
+
+    void SetWidth(float _width);
+    void SetHeight(float _height);
+
+    Maths::Vector2f GetPivot() const;
+    void SetPivot(const Maths::Vector2f& _pivot);
 
     static bool IsColliding(const SquareCollider& _collider_a, const SquareCollider& _collider_b);
+
+private:
+    Maths::Vector2f size;
+    Maths::Vector2f pivot;
 };
